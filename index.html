@@ -4,28 +4,48 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Tendex — a brief for Forum</title>
-<meta name="description" content="A private brief from Tendex to Forum Markets Group: the research terminal for attention markets, and a pilot to bring serious trading desks onto Forum.">
+<meta name="description" content="A brief from Tendex to Forum Markets Group: the research terminal for attention markets, and the rooms that can fill the first book.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Outfit:wght@400;500;600&display=swap" rel="stylesheet">
+<script>
+try {
+  var saved = localStorage.getItem("tendex-theme");
+  if (saved === "dark" || saved === "light") document.documentElement.setAttribute("data-theme", saved);
+} catch (e) {}
+</script>
 <style>
   :root {
-    --paper: #f3f0e8;
-    --paper-2: #e7e2d6;
-    --ink: #16191e;
-    --ink-soft: #3a4038;
-    --muted: #6b655c;
-    --rule: #d4cec2;
-    --slate: #1e3f56;
-    --amber: #8d5a1a;
-    --amber-wash: rgba(141, 90, 26, 0.1);
-    --bid: #1d6b4a;
-    --offer: #8e3030;
-    --serif: "Newsreader", "Iowan Old Style", Palatino, "Palatino Linotype", serif;
-    --sans: "IBM Plex Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    --bg: #f5f6f8;
+    --ink: #0e1420;
+    --soft: #3d4556;
+    --muted: #667085;
+    --line: #e2e5ea;
+    --card: #ffffff;
+    --blue: #2f54eb;
+    --blue-ink: #1d39c4;
+    --amber: #b5710c;
+    --up: #0e7c5a;
+    --down: #c42b3a;
+    --nav: rgba(245, 246, 248, 0.92);
+    --shadow: 0 1px 0 rgba(14, 20, 32, 0.04);
+    --sans: "Outfit", ui-sans-serif, system-ui, sans-serif;
     --mono: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
-    --measure: 38rem;
-    --rail: 11.5rem;
+  }
+  html[data-theme="dark"] {
+    --bg: #0e1420;
+    --ink: #f5f6f8;
+    --soft: #c5cad3;
+    --muted: #98a2b3;
+    --line: #2a3142;
+    --card: #161c28;
+    --blue: #85a1ff;
+    --blue-ink: #b7c6ff;
+    --amber: #e0a04a;
+    --up: #3dbe8b;
+    --down: #ff8b8b;
+    --nav: rgba(14, 20, 32, 0.92);
+    --shadow: none;
   }
   * { box-sizing: border-box; }
   html { scroll-behavior: smooth; }
@@ -35,888 +55,531 @@
   }
   body {
     margin: 0;
-    background: var(--paper);
+    background: var(--bg);
     color: var(--ink);
     font-family: var(--sans);
     font-size: 17px;
     line-height: 1.5;
     font-weight: 400;
   }
-  button, a { font: inherit; }
+  img { max-width: 100%; display: block; }
+  button, a { font: inherit; color: inherit; }
   button { cursor: pointer; }
-  :focus-visible {
-    outline: 2px solid var(--slate);
-    outline-offset: 3px;
-  }
-  .skip {
-    position: absolute;
-    left: -999px;
-    top: 0;
-  }
-  .skip:focus { left: 12px; top: 12px; background: #fff; padding: 8px 12px; z-index: 20; }
+  :focus-visible { outline: 2px solid var(--blue); outline-offset: 3px; }
+  .skip { position: absolute; left: -999px; }
+  .skip:focus { left: 12px; top: 12px; background: var(--card); padding: 8px 12px; z-index: 20; }
 
-  .rail {
-    display: none;
-  }
-  .progress {
+  .top {
     position: sticky;
     top: 0;
     z-index: 8;
     display: flex;
-    justify-content: space-between;
-    gap: 12px;
     align-items: center;
-    padding: 10px 20px;
-    background: rgba(243, 240, 232, 0.92);
-    border-bottom: 1px solid var(--rule);
-    backdrop-filter: blur(8px);
-    font-family: var(--mono);
-    font-size: 11px;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--muted);
+    justify-content: space-between;
+    gap: 16px;
+    padding: 14px 22px;
+    background: var(--nav);
+    border-bottom: 1px solid var(--line);
+    backdrop-filter: blur(10px);
   }
-  .progress strong { color: var(--ink); font-weight: 500; }
-  .dots { display: flex; gap: 6px; }
-  .dots button {
-    width: 18px;
-    height: 2px;
-    padding: 0;
-    border: 0;
-    background: var(--rule);
-  }
-  .dots button[aria-current="true"] { background: var(--ink); }
-
-  .deck-nav {
-    position: fixed;
-    right: 16px;
-    bottom: 16px;
-    z-index: 9;
-    display: flex;
-    gap: 0;
-    border: 1px solid var(--ink);
-    background: var(--paper);
-  }
-  .deck-nav button {
-    background: transparent;
-    color: var(--ink);
-    border: 0;
-    padding: 10px 14px;
-    font-family: var(--mono);
-    font-size: 12px;
-    letter-spacing: 0.06em;
-  }
-  .deck-nav button + button { border-left: 1px solid var(--ink); }
-  .deck-nav button:hover { background: var(--ink); color: var(--paper); }
-
-  section.sheet {
-    min-height: 100svh;
-    padding: 28px 20px 88px;
-    scroll-margin-top: 42px;
-    border-bottom: 1px solid var(--rule);
-  }
-  .sheet-inner { max-width: 920px; margin: 0 auto; min-width: 0; }
-  h1, h2, .dek, .people p { overflow-wrap: break-word; }
-  .kicker {
-    font-family: var(--mono);
-    font-size: 11px;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: var(--amber);
-    margin: 0 0 14px;
-  }
-  h1, h2, h3 { font-family: var(--serif); font-weight: 500; letter-spacing: -0.02em; }
-  h1 {
-    font-size: clamp(2.4rem, 6vw, 4.4rem);
-    line-height: 0.98;
-    margin: 0 0 18px;
-    max-width: 16ch;
-  }
-  h2 {
-    font-size: clamp(2rem, 4vw, 3.1rem);
-    line-height: 1.05;
-    margin: 0 0 14px;
-    max-width: 18ch;
-  }
-  .dek {
-    max-width: var(--measure);
-    font-size: 1.125rem;
-    color: var(--ink-soft);
-    margin: 0 0 28px;
-  }
-  .brandline {
+  .brand {
     display: flex;
     align-items: center;
     gap: 10px;
-    margin-bottom: 48px;
+    text-decoration: none;
+    font-weight: 600;
+    letter-spacing: -0.03em;
+    font-size: 18px;
   }
-  .brandline svg { display: block; }
-  .brandline span {
+  .top nav { display: flex; flex-wrap: wrap; gap: 4px 14px; }
+  .top nav a {
+    text-decoration: none;
+    color: var(--muted);
+    font-size: 14px;
+    font-weight: 500;
+  }
+  .top nav a:hover, .top nav a[aria-current="true"] { color: var(--ink); }
+  .theme {
+    border: 1px solid var(--line);
+    background: var(--card);
+    color: var(--ink);
+    border-radius: 999px;
+    padding: 7px 12px;
+    font-size: 13px;
+    font-weight: 500;
+    white-space: nowrap;
+  }
+  .theme:hover { border-color: var(--ink); }
+
+  main { max-width: 1080px; margin: 0 auto; padding: 0 22px 80px; }
+  section { padding: 72px 0; border-bottom: 1px solid var(--line); scroll-margin-top: 72px; }
+  .kicker {
+    margin: 0 0 12px;
     font-family: var(--mono);
     font-size: 12px;
-    letter-spacing: 0.18em;
+    letter-spacing: 0.08em;
     text-transform: uppercase;
+    color: var(--amber);
   }
-  .brandline small {
-    display: block;
-    letter-spacing: 0.12em;
-    color: var(--muted);
-    margin-top: 2px;
-  }
+  h1, h2, h3 { font-weight: 500; letter-spacing: -0.035em; margin: 0; }
+  h1 { font-size: clamp(2.6rem, 6vw, 4.6rem); line-height: 0.98; max-width: 14ch; }
+  h2 { font-size: clamp(1.8rem, 3.5vw, 2.8rem); line-height: 1.05; max-width: 18ch; }
+  .dek { max-width: 40rem; color: var(--soft); font-size: 1.125rem; margin: 16px 0 0; }
+  .hero { display: grid; gap: 36px; align-items: end; padding-top: 48px; }
+  .shot { margin: 0; }
+  .shot img { width: 100%; height: auto; border-radius: 12px; border: 1px solid var(--line); }
+  .shot figcaption { margin-top: 8px; color: var(--muted); font-size: 13px; }
 
-  .hero-grid {
+  .meta {
     display: grid;
-    gap: 36px;
-  }
-  .hero-grid > *, .panel, .chart { min-width: 0; max-width: 100%; }
-  .kicker { max-width: 100%; }
-  .meta-row {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 18px 28px;
-    margin: 0;
-    padding: 0;
-    list-style: none;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px 24px;
+    margin: 28px 0 0;
+    padding: 16px 0 0;
     border-top: 1px solid var(--ink);
-    padding-top: 14px;
+    list-style: none;
   }
-  .meta-row li { min-width: 0; flex: 1 1 8rem; }
-  .meta-row span {
+  .meta span {
     display: block;
     font-family: var(--mono);
-    font-size: 10px;
-    letter-spacing: 0.12em;
+    font-size: 11px;
+    letter-spacing: 0.08em;
     text-transform: uppercase;
     color: var(--muted);
     margin-bottom: 4px;
   }
 
-  .panel {
-    background: #faf8f3;
-    border: 1px solid var(--rule);
-    padding: 16px 16px 12px;
+  .terminal {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+    overflow: hidden;
   }
-  .panel header {
-    display: flex;
-    justify-content: space-between;
-    gap: 12px;
-    align-items: baseline;
+  .terminal header, .row {
+    display: grid;
+    grid-template-columns: 1.4fr 0.8fr 0.6fr 0.7fr;
+    gap: 8px;
+    align-items: center;
+    padding: 12px 16px;
+  }
+  .terminal header {
     font-family: var(--mono);
     font-size: 11px;
     letter-spacing: 0.08em;
     text-transform: uppercase;
     color: var(--muted);
-    margin-bottom: 8px;
+    border-bottom: 1px solid var(--line);
   }
-  .panel header b { color: var(--ink); font-weight: 500; }
-  .chart { width: 100%; height: auto; display: block; }
-  .legend {
-    display: flex;
-    gap: 8px;
-    margin-top: 8px;
+  .row { border-top: 1px solid var(--line); font-size: 15px; }
+  .row b { font-weight: 500; }
+  .venue {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--muted);
   }
+  .up { color: var(--up); font-variant-numeric: tabular-nums; }
+  .flat { color: var(--amber); font-variant-numeric: tabular-nums; }
+  .chart-wrap { padding: 8px 12px 4px; }
+  .chart { width: 100%; height: auto; }
+  .legend { display: flex; gap: 8px; padding: 0 16px 14px; }
   .legend button {
-    border: 1px solid var(--rule);
+    border: 1px solid var(--line);
     background: transparent;
-    color: var(--ink);
-    padding: 6px 10px;
-    font-family: var(--mono);
-    font-size: 11px;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
+    border-radius: 999px;
+    padding: 6px 12px;
+    font-size: 13px;
+    font-weight: 500;
   }
-  .legend button[aria-pressed="true"] { border-color: var(--ink); background: var(--ink); color: var(--paper); }
-  .legend .swatch {
-    display: inline-block;
-    width: 14px;
-    height: 2px;
-    margin-right: 6px;
-    vertical-align: middle;
-    background: currentColor;
-  }
-  .note {
-    font-family: var(--mono);
-    font-size: 11px;
-    color: var(--muted);
-    margin: 8px 0 0;
-  }
+  .legend button[aria-pressed="true"] { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+  .note { margin: 0; padding: 0 16px 14px; color: var(--muted); font-size: 12px; font-family: var(--mono); }
 
-  .switch {
-    display: flex;
-    flex-wrap: wrap;
-    border-bottom: 1px solid var(--ink);
-    margin: 8px 0 0;
-  }
-  .switch button {
-    background: transparent;
-    border: 0;
-    border-bottom: 2px solid transparent;
-    margin-bottom: -1px;
-    color: var(--muted);
-    padding: 10px 14px 10px 0;
-    margin-right: 18px;
-    font-family: var(--mono);
-    font-size: 12px;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-  }
-  .switch button[aria-selected="true"] {
+  .switch { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 22px; }
+  .switch button, .desk {
+    border: 1px solid var(--line);
+    background: var(--card);
     color: var(--ink);
-    border-bottom-color: var(--amber);
+    border-radius: 999px;
+    padding: 8px 14px;
+    font-weight: 500;
   }
-  .module {
-    display: grid;
-    grid-template-columns: 4.5rem 1fr;
-    gap: 8px 18px;
-    padding: 22px 0 8px;
-    max-width: 40rem;
-  }
-  .module .num {
-    font-family: var(--serif);
-    font-size: 1.75rem;
-    line-height: 1;
-    color: var(--amber);
-  }
-  .module h3 { margin: 0 0 8px; font-size: 1.7rem; }
-  .module p { margin: 0; color: var(--ink-soft); }
-
-  .benefit-list { list-style: none; margin: 18px 0 0; padding: 0; border-top: 1px solid var(--rule); }
-  .benefit-list li { border-bottom: 1px solid var(--rule); }
-  .benefit-list button {
-    width: 100%;
-    text-align: left;
-    background: transparent;
-    border: 0;
-    padding: 16px 0;
-    display: grid;
-    grid-template-columns: 2.5rem 1fr auto;
-    gap: 8px;
-    align-items: baseline;
-    color: var(--ink);
-  }
-  .benefit-list button span:first-child {
-    font-family: var(--mono);
-    font-size: 12px;
-    color: var(--amber);
-  }
-  .benefit-list .title { font-family: var(--serif); font-size: 1.45rem; letter-spacing: -0.02em; }
-  .benefit-list .plus { font-family: var(--mono); color: var(--muted); }
-  .benefit-list .body {
-    display: none;
-    margin: 0;
-    padding: 0 0 16px 2.5rem;
-    max-width: 38rem;
-    color: var(--ink-soft);
-  }
-  .benefit-list li.open .body { display: block; }
-  .benefit-list li.open .plus { color: var(--ink); }
-
-  .desks {
-    display: grid;
-    gap: 12px;
-    margin-top: 8px;
-  }
-  .desk {
-    text-align: left;
-    background: transparent;
-    border: 1px solid var(--rule);
-    padding: 16px;
-    color: var(--ink);
-  }
-  .desk[aria-pressed="true"] {
+  .switch button[aria-selected="true"], .desk[aria-pressed="true"] {
     background: var(--ink);
-    color: var(--paper);
+    color: var(--bg);
     border-color: var(--ink);
   }
-  .desk small {
+  .panel { margin-top: 18px; max-width: 42rem; }
+  .panel h3 { font-size: 1.7rem; margin-bottom: 8px; }
+  .panel p { margin: 0 0 12px; color: var(--soft); }
+  .chips { display: flex; flex-wrap: wrap; gap: 8px; margin: 8px 0 0; padding: 0; list-style: none; }
+  .chips li {
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    padding: 6px 10px;
+    font-size: 13px;
+    background: var(--card);
+  }
+
+  .doors { display: grid; gap: 12px; margin-top: 22px; }
+  .door {
+    text-align: left;
+    border: 1px solid var(--line);
+    background: var(--card);
+    border-radius: 12px;
+    padding: 16px;
+  }
+  .door small {
     display: block;
     font-family: var(--mono);
-    font-size: 10px;
-    letter-spacing: 0.12em;
+    font-size: 11px;
+    letter-spacing: 0.08em;
     text-transform: uppercase;
-    margin-bottom: 8px;
     color: var(--amber);
-  }
-  .desk[aria-pressed="true"] small { color: #e6c48a; }
-  .desk strong {
-    display: block;
-    font-family: var(--serif);
-    font-size: 1.45rem;
-    font-weight: 500;
-    letter-spacing: -0.02em;
     margin-bottom: 6px;
   }
-  .desk p { margin: 0; font-size: 0.95rem; }
+  .door strong { display: block; font-size: 1.25rem; font-weight: 500; letter-spacing: -0.03em; margin-bottom: 6px; }
+  .door p { margin: 0; color: var(--soft); font-size: 0.95rem; }
 
   .steps { list-style: none; margin: 20px 0 0; padding: 0; }
-  .steps li { border-top: 1px solid var(--rule); }
+  .steps li { border-top: 1px solid var(--line); }
   .steps button {
     width: 100%;
     text-align: left;
     background: transparent;
     border: 0;
     padding: 14px 0;
-    display: grid;
-    grid-template-columns: 2.2rem 1fr;
-    gap: 10px;
     color: var(--muted);
   }
   .steps li.active button { color: var(--ink); }
-  .steps .n { font-family: var(--mono); font-size: 12px; padding-top: 6px; }
-  .steps strong {
-    display: block;
-    font-family: var(--serif);
-    font-weight: 500;
-    font-size: 1.35rem;
-    letter-spacing: -0.02em;
-  }
-  .steps .detail {
-    display: none;
-    grid-column: 2;
-    margin: 6px 0 0;
-    color: var(--ink-soft);
-    font-family: var(--sans);
-    font-size: 1rem;
-  }
+  .steps .n { font-family: var(--mono); font-size: 12px; margin-right: 10px; }
+  .steps strong { font-weight: 500; font-size: 1.25rem; letter-spacing: -0.03em; }
+  .steps .detail { display: none; margin: 6px 0 0 28px; color: var(--soft); }
   .steps li.active .detail { display: block; }
-  .steps li.active { background: linear-gradient(90deg, var(--amber-wash), transparent 70%); }
 
   .ask {
     background: var(--ink);
-    color: #f3f0e8;
-    border-bottom-color: var(--ink);
-  }
-  .ask .kicker { color: #e6c48a; }
-  .ask .dek { color: #d9d3c7; }
-  .ask-grid {
-    display: grid;
-    gap: 18px;
+    color: var(--bg);
+    border-radius: 16px;
+    padding: 28px 22px;
     margin-top: 8px;
   }
-  .ask article {
-    border-top: 1px solid rgba(243, 240, 232, 0.25);
-    padding-top: 14px;
-  }
-  .ask h3 {
-    margin: 0 0 6px;
-    font-size: 1.45rem;
-    color: #f3f0e8;
-  }
-  .ask p { margin: 0; color: #d9d3c7; max-width: 36rem; }
+  .ask .kicker { color: var(--amber); }
+  .ask h2, .ask p { color: var(--bg); }
+  .ask .dek { color: var(--bg); opacity: 0.82; }
+  .ask-grid { display: grid; gap: 16px; margin-top: 18px; }
+  .ask h3 { font-size: 1.3rem; }
+  .ask article p { margin: 6px 0 0; opacity: 0.85; }
   .mailto {
     display: inline-block;
-    margin-top: 28px;
-    background: #f3f0e8;
+    margin-top: 22px;
+    background: var(--bg);
     color: var(--ink);
     text-decoration: none;
+    border-radius: 999px;
     padding: 12px 16px;
-    font-family: var(--mono);
-    font-size: 12px;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
+    font-weight: 500;
   }
-  .mailto:hover { background: #fff; }
 
-  .people {
-    display: grid;
-    gap: 18px;
-    margin-top: 12px;
-  }
-  .people article {
-    border-top: 1px solid var(--ink);
-    padding-top: 14px;
-  }
-  .people h3 { margin: 0; font-size: 1.8rem; }
-  .people .role {
-    font-family: var(--mono);
-    font-size: 11px;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--muted);
-    margin: 4px 0 8px;
-  }
-  .people p { margin: 0; max-width: 36rem; color: var(--ink-soft); }
-  .people p + p { margin-top: 10px; }
-  .portrait, .monogram {
-    width: 120px;
-    height: 144px;
-    margin: 0 0 16px;
-    border: 1px solid var(--ink);
-    display: block;
-  }
-  .portrait {
-    object-fit: cover;
-    object-position: center 18%;
-    filter: grayscale(1) contrast(1.04);
-  }
+  .people { display: grid; gap: 28px; }
+  .people article { border-top: 1px solid var(--line); padding-top: 16px; }
   .monogram {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: var(--paper-2);
-    font-family: var(--serif);
-    font-size: 2rem;
-    letter-spacing: -0.03em;
+    width: 72px; height: 72px;
+    display: flex; align-items: center; justify-content: center;
+    border: 1px solid var(--ink);
+    border-radius: 12px;
+    font-size: 1.4rem;
+    margin-bottom: 12px;
   }
-  .facts {
-    list-style: none;
-    margin: 16px 0 0;
-    padding: 0;
-    max-width: 36rem;
-    font-family: var(--mono);
-    font-size: 11px;
-    letter-spacing: 0.03em;
-    color: var(--muted);
-  }
-  .facts li {
-    padding: 6px 0;
-    border-top: 1px solid var(--rule);
-  }
+  .role { font-family: var(--mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); margin: 6px 0 10px; }
+  .facts { list-style: none; margin: 12px 0 0; padding: 0; color: var(--muted); font-size: 14px; }
+  .facts li { padding: 6px 0; border-top: 1px solid var(--line); }
 
-  footer.colophon {
-    padding: 28px 20px 100px;
-    max-width: 920px;
-    margin: 0 auto;
-    color: var(--muted);
-    font-size: 13px;
-  }
-  footer.colophon p { margin: 0 0 8px; max-width: 40rem; }
+  footer { color: var(--muted); font-size: 14px; padding-bottom: 40px; }
+  footer p { max-width: 42rem; }
 
+  @media (max-width: 760px) {
+    .top { align-items: flex-start; flex-wrap: wrap; }
+    .top nav { order: 3; width: 100%; }
+    .terminal header, .row { grid-template-columns: 1.2fr 0.7fr 0.6fr; }
+    .terminal header span:nth-child(2), .row .venue { display: none; }
+    section { padding: 48px 0; }
+    main { padding-left: 16px; padding-right: 16px; }
+  }
   @media (min-width: 880px) {
-    body { padding-left: var(--rail); }
-    .rail {
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      position: fixed;
-      inset: 0 auto 0 0;
-      width: var(--rail);
-      border-right: 1px solid var(--rule);
-      padding: 22px 16px;
-      background: var(--paper);
-      z-index: 7;
-    }
-    .rail nav { display: flex; flex-direction: column; gap: 2px; }
-    .rail a {
-      color: var(--muted);
-      text-decoration: none;
-      font-family: var(--mono);
-      font-size: 11px;
-      letter-spacing: 0.04em;
-      padding: 5px 0;
-    }
-    .rail a[aria-current="true"] { color: var(--ink); }
-    .rail .word {
-      font-family: var(--mono);
-      font-size: 11px;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-    }
-    .progress { display: none; }
-    .sheet { padding: 64px 48px 80px; }
-    .hero-grid { grid-template-columns: 1.15fr 0.85fr; align-items: end; }
-    .desks { grid-template-columns: repeat(3, 1fr); }
-    .ask-grid { grid-template-columns: 1fr 1fr 1fr; }
+    .hero { grid-template-columns: 1.05fr 0.95fr; }
+    .meta { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+    .doors { grid-template-columns: repeat(3, 1fr); }
+    .ask-grid { grid-template-columns: repeat(3, 1fr); }
     .people { grid-template-columns: 1fr 1fr; }
-    .deck-nav { right: 28px; bottom: 28px; }
   }
 </style>
 </head>
 <body>
 <a class="skip" href="#opening">Skip to the brief</a>
-
-<aside class="rail">
-  <div class="word">Tendex</div>
+<header class="top">
+  <a class="brand" href="#opening">
+    <svg width="22" height="22" viewBox="0 0 28 28" aria-hidden="true">
+      <rect x="0.5" y="0.5" width="27" height="27" rx="4" fill="none" stroke="currentColor"/>
+      <path d="M5 18 H23" stroke="currentColor" opacity="0.35"/>
+      <path d="M5 19 L11 15 L16 16 L23 8" fill="none" stroke="#2f54eb" stroke-width="1.6"/>
+      <path d="M5 14 L10 12 L15 13 L21 6 L23 8" fill="none" stroke="#b5710c" stroke-width="1.6"/>
+    </svg>
+    Tendex
+  </a>
   <nav aria-label="Brief">
-    <a href="#opening">01 Opening</a>
-    <a href="#terminal">02 Terminal</a>
-    <a href="#forum">03 For Forum</a>
-    <a href="#desks">04 The desks</a>
-    <a href="#together">05 Together</a>
-    <a href="#ask">06 The pilot</a>
-    <a href="#people">07 People</a>
+    <a href="#opening">Opening</a>
+    <a href="#terminal">Desk</a>
+    <a href="#rooms">Rooms</a>
+    <a href="#leo">Leo</a>
+    <a href="#ben">Ben</a>
+    <a href="#ask">Ask</a>
   </nav>
-  <div class="word">Forum</div>
-</aside>
-
-<div class="progress" aria-hidden="true">
-  <span>Tendex · <strong id="progress-label">01 Opening</strong></span>
-  <span class="dots" id="dots"></span>
-</div>
+  <button class="theme" id="theme" type="button" aria-pressed="false">Dark mode</button>
+</header>
 
 <main>
-  <section class="sheet" id="opening" data-label="01 Opening">
-    <div class="sheet-inner hero-grid">
-      <div>
-        <div class="brandline">
-          <svg width="28" height="28" viewBox="0 0 28 28" aria-hidden="true">
-            <rect x="0.5" y="0.5" width="27" height="27" fill="none" stroke="#16191e"/>
-            <path d="M4 18 H24" stroke="#d4cec2"/>
-            <path d="M4 20 L10 16 L15 17 L22 9" fill="none" stroke="#1e3f56" stroke-width="1.4"/>
-            <path d="M4 14 L9 12 L14 13 L20 6 L24 8" fill="none" stroke="#8d5a1a" stroke-width="1.4"/>
-          </svg>
-          <span>Tendex<small>Attention markets</small></span>
-        </div>
-        <p class="kicker">Private brief · Forum Markets Group · 31 October 2026</p>
-        <h1>Build the book with desks that can size it.</h1>
-        <p class="dek">Tendex is the research terminal for attention markets. This is a proposal to put Forum’s indices on that desk, and to introduce the traders who can give those indices a real book.</p>
-        <ul class="meta-row">
-          <li><span>From</span>Leo Chow &amp; Ben Killen</li>
-          <li><span>To</span>Forum Markets Group</li>
-          <li><span>Ask</span>A two-week pilot</li>
-          <li><span>Buyer</span>Prop, makers, funds</li>
-        </ul>
-      </div>
-      <figure class="panel">
-        <header>
-          <b>Desk</b>
-          <span>Illustrative paths</span>
-        </header>
-        <svg class="chart" viewBox="0 0 360 168" role="img" aria-label="Illustrative price and attention series on one axis.">
-          <g stroke="#d4cec2" stroke-width="1">
-            <path d="M16 28 H344"/>
-            <path d="M16 68 H344"/>
-            <path d="M16 108 H344"/>
-            <path d="M16 140 H344"/>
-          </g>
-          <path id="series-price" d="M16 118 L52 112 L88 116 L124 100 L160 104 L196 86 L232 90 L268 72 L304 68 L344 60" fill="none" stroke="#1e3f56" stroke-width="1.6"/>
-          <path id="series-attention" d="M16 96 L52 88 L88 92 L124 70 L160 78 L196 54 L232 62 L268 40 L304 48 L344 34" fill="none" stroke="#8d5a1a" stroke-width="1.6"/>
-          <circle id="dot-price" cx="344" cy="60" r="2.5" fill="#1e3f56"/>
-          <circle id="dot-attention" cx="344" cy="34" r="2.5" fill="#8d5a1a"/>
-        </svg>
-        <div class="legend" role="group" aria-label="Series">
-          <button type="button" id="toggle-price" aria-pressed="true"><i class="swatch" style="background:#1e3f56"></i>Price</button>
-          <button type="button" id="toggle-attention" aria-pressed="true"><i class="swatch" style="background:#8d5a1a"></i>Attention</button>
-        </div>
-        <p class="note">Sample drawing of the screen: one market, two series. Not a live print and not a performance claim.</p>
-      </figure>
-    </div>
-  </section>
-
-  <section class="sheet" id="terminal" data-label="02 Terminal">
-    <div class="sheet-inner">
-      <p class="kicker">02 · What Tendex is</p>
-      <h2>A terminal beside the venue.</h2>
-      <p class="dek">Forum makes the index and keeps the exchange. Tendex is where a desk reads that market before it trades. Three jobs, already in the product.</p>
-      <div class="switch" role="tablist" aria-label="Terminal jobs">
-        <button type="button" role="tab" id="tab-screen" aria-controls="panel-screen" aria-selected="true">The screen</button>
-        <button type="button" role="tab" id="tab-tape" aria-controls="panel-tape" aria-selected="false">The tape</button>
-        <button type="button" role="tab" id="tab-api" aria-controls="panel-api" aria-selected="false">The API</button>
-      </div>
-      <div class="module" id="panel-screen" role="tabpanel" aria-labelledby="tab-screen">
-        <div class="num">01</div>
-        <div>
-          <h3>Price beside the attention series.</h3>
-          <p>Each attention market on one view: the venue, the price, and the attention series that market references. The working screen already covers attention markets we can read, including on Polymarket. Forum is the index we want on that row next, under your data rules.</p>
-        </div>
-      </div>
-      <div class="module" id="panel-tape" role="tabpanel" aria-labelledby="tab-tape" hidden>
-        <div class="num">02</div>
-        <div>
-          <h3>Book and tape, lined up with attention.</h3>
-          <p>The order book does not sit in a public archive. Tendex keeps the book and the trades and lines them up with the attention series, so a desk can replay how price and attention moved together.</p>
-        </div>
-      </div>
-      <div class="module" id="panel-api" role="tabpanel" aria-labelledby="tab-api" hidden>
-        <div class="num">03</div>
-        <div>
-          <h3>A feed for a desk’s own models.</h3>
-          <p>Technical users can take Tendex’s own series into a sheet or a bot. Raw third-party feeds stay on the screen and out of the API. We display a partner’s data. We do not resell it.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="sheet" id="forum" data-label="03 For Forum">
-    <div class="sheet-inner">
-      <p class="kicker">03 · Why Forum</p>
-      <h2>Four things this gives Forum.</h2>
-      <p class="dek">The point of the pilot is a better first book: traders who already know how to read a market, introduced by name, measured on an action you define.</p>
-      <ul class="benefit-list" id="benefits">
-        <li class="open">
-          <button type="button" aria-expanded="true">
-            <span>01</span>
-            <span class="title">A research desk you do not have to staff</span>
-            <span class="plus" aria-hidden="true">–</span>
-          </button>
-          <p class="body">Your traders get price, the attention series, and the book on one screen. Forum stays the place they trade. The terminal is the reading layer in front of the venue.</p>
-        </li>
-        <li>
-          <button type="button" aria-expanded="false">
-            <span>02</span>
-            <span class="title">Whale accounts, introduced by name</span>
-            <span class="plus" aria-hidden="true">+</span>
-          </button>
-          <p class="body">Ben will open this personally. From 2024 to 2026 he ran partner acquisition for Bybit: KOLs, VIP referrers, affiliates and institutional conversations, with a proposal for each segment and a cadence of 50 outreaches a week. He is founder of Growth Labs and an advisor to The Collective, a private room of founders, investors and operators. The same motion, pointed at prop desks, market makers and funds, is what Forum gets. Gulf relationships come from that Dubai-based exchange seat, and from iGaming partner work. A signup list is not the offer. We will not publish trading-volume figures from the Bybit years. Those stay with Bybit.</p>
-        </li>
-        <li>
-          <button type="button" aria-expanded="false">
-            <span>03</span>
-            <span class="title">A gate that prefers size</span>
-            <span class="plus" aria-hidden="true">+</span>
-          </button>
-          <p class="body">Fuller access to the terminal can be reserved for accounts that show real activity on Forum. The product then pulls the traders you want on the book. We follow your eligible geography and only introduce people you can accept.</p>
-        </li>
-        <li>
-          <button type="button" aria-expanded="false">
-            <span>04</span>
-            <span class="title">A count you can audit</span>
-            <span class="plus" aria-hidden="true">+</span>
-          </button>
-          <p class="body">We report who was introduced, who qualified, who completed the action you name, and who came back. Impressions, Discord joins, and simulated volume stay out of the result.</p>
-        </li>
+  <section class="hero" id="opening">
+    <div>
+      <p class="kicker">For Forum Markets Group · 31 October 2026</p>
+      <h1>Build the book with the rooms that already have the attention.</h1>
+      <p class="dek">Tendex is the research terminal for attention markets. Forum keeps the index and the exchange. This brief is a two-week pilot: your market on our desk, and introductions from three rooms Ben already works — trading, retail brands, and live talent.</p>
+      <ul class="meta">
+        <li><span>From</span>Leo Chow and Ben Killen</li>
+        <li><span>To</span>Forum Markets Group</li>
+        <li><span>Ask</span>One cohort, then a price</li>
+        <li><span>Buyer</span>Desks, and the culture around them</li>
       </ul>
     </div>
+    <figure class="shot">
+      <img src="assets/ben-bybit.jpg" alt="Ben Killen on stage for Bybit, presenting a fund product to a room.">
+      <figcaption>Ben, on stage for Bybit, walking a room through a fund. The slide is the fund’s. The point is the room.</figcaption>
+    </figure>
   </section>
 
-  <section class="sheet" id="desks" data-label="04 The desks">
-    <div class="sheet-inner">
-      <p class="kicker">04 · The customer</p>
-      <h2>The same desks. A different market.</h2>
-      <p class="dek">Oddpool built institutional connectivity for prediction markets, for market makers, prop firms, and hedge funds, and is joining Kalshi. Attention markets need those same readers. Forum should be the venue they meet.</p>
-      <div class="desks" role="group" aria-label="Buyer desks">
-        <button type="button" class="desk" aria-pressed="true" data-desk="makers">
-          <small>Market makers</small>
-          <strong>Quote with the series in view.</strong>
-          <p class="desk-copy">Depth, last trades, and the attention series on one screen before they size a quote on a Forum index.</p>
-        </button>
-        <button type="button" class="desk" aria-pressed="false" data-desk="prop">
-          <small>Prop trading firms</small>
-          <strong>One job, one desk.</strong>
-          <p class="desk-copy">A watchlist of attention markets with the reference series attached, and a direct path into the Forum market they decide to trade.</p>
-        </button>
-        <button type="button" class="desk" aria-pressed="false" data-desk="funds">
-          <small>Hedge funds</small>
-          <strong>Attention as a second series.</strong>
-          <p class="desk-copy">A researched path of attention next to a theme the fund already trades, with the book behind the print.</p>
-        </button>
+  <section id="terminal">
+    <p class="kicker">The desk · same module as the terminal</p>
+    <h2>Price, the attention series, and the venue on one row.</h2>
+    <p class="dek">This is the screen a trader already understands. Each market carries its venue, its price, and the attention series it references. Forum is the venue we want on that row, on your terms. The figures below are a sample of the layout.</p>
+    <div class="terminal" style="margin-top:22px">
+      <div class="chart-wrap">
+        <svg class="chart" viewBox="0 0 640 180" role="img" aria-label="Sample price and attention series.">
+          <g stroke="currentColor" opacity="0.15">
+            <path d="M16 36 H624"/><path d="M16 80 H624"/><path d="M16 124 H624"/><path d="M16 156 H624"/>
+          </g>
+          <path id="series-price" d="M16 130 L70 122 L130 126 L190 104 L250 110 L310 86 L370 92 L430 70 L500 64 L560 58 L624 50" fill="none" stroke="#2f54eb" stroke-width="2"/>
+          <path id="series-attention" d="M16 108 L70 96 L130 100 L190 72 L250 80 L310 52 L370 64 L430 40 L500 48 L560 34 L624 28" fill="none" stroke="#b5710c" stroke-width="2"/>
+        </svg>
       </div>
-      <p class="note" id="desk-status">These are the buyers we will recruit with you. They are not a current client list.</p>
+      <div class="legend" role="group" aria-label="Series">
+        <button type="button" id="toggle-price" aria-pressed="true">Price</button>
+        <button type="button" id="toggle-attention" aria-pressed="true">Attention</button>
+      </div>
+      <header>
+        <span>Market</span><span>Venue</span><span>Price</span><span>Attention</span>
+      </header>
+      <div class="row"><b>Cultural index</b><span class="venue">Forum</span><span class="up">—</span><span class="flat">series</span></div>
+      <div class="row"><b>Attention market</b><span class="venue">Polymarket</span><span class="up">live on desk</span><span class="flat">overlaid</span></div>
+      <div class="row"><b>Book and tape</b><span class="venue">Archived</span><span class="up">replay</span><span class="flat">aligned</span></div>
+      <p class="note">Sample drawing. Not a live print and not a performance claim. Raw partner feeds stay on the screen and out of the API.</p>
     </div>
   </section>
 
-  <section class="sheet" id="together" data-label="05 Together">
-    <div class="sheet-inner">
-      <p class="kicker">05 · How the market gets built</p>
-      <h2>Five moves, one cohort.</h2>
-      <p class="dek">Forum names the trader and the action. Tendex puts the index on the desk. Ben brings a short list from his network and stays on the onboarding.</p>
-      <ol class="steps" id="steps">
-        <li class="active">
-          <button type="button">
-            <span class="n">01</span>
-            <span>
-              <strong>Forum names the market.</strong>
-              <span class="detail">One index. One eligible trader. One useful first action. One owner on your side.</span>
-            </span>
-          </button>
-        </li>
-        <li>
-          <button type="button">
-            <span class="n">02</span>
-            <span>
-              <strong>That index goes on the desk.</strong>
-              <span class="detail">Price, attention series, and book, under the data terms you set. Raw Forum data stays on the screen.</span>
-            </span>
-          </button>
-        </li>
-        <li>
-          <button type="button">
-            <span class="n">03</span>
-            <span>
-              <strong>Ben opens a short list.</strong>
-              <span class="detail">The same partner motion he ran at Bybit: a named person, a specific reason, and a personal onboarding. First doors are KOL and VIP relationships from that seat, Gulf contacts, and direct approaches to prop desks, market makers and funds. No paid promotion in this step.</span>
-            </span>
-          </button>
-        </li>
-        <li>
-          <button type="button">
-            <span class="n">04</span>
-            <span>
-              <strong>They are onboarded in person.</strong>
-              <span class="detail">Each introduction gets a walkthrough of the market on Tendex and a route into the Forum action you defined. We record completion and whether they return.</span>
-            </span>
-          </button>
-        </li>
-        <li>
-          <button type="button">
-            <span class="n">05</span>
-            <span>
-              <strong>We read the result together.</strong>
-              <span class="detail">A written note: introduced, qualified, acted, returned. Commercial terms come after that note.</span>
-            </span>
-          </button>
-        </li>
-      </ol>
+  <section id="rooms">
+    <p class="kicker">Three doors · one introduction list</p>
+    <h2>The connections are different in each room.</h2>
+    <p class="dek">Forum’s index prices cultural attention, and it needs people who can trade size. Ben’s work already sits in both places. Pick a room.</p>
+    <div class="switch" role="tablist" aria-label="Rooms">
+      <button type="button" role="tab" id="tab-bybit" aria-selected="true" aria-controls="panel-bybit">Bybit</button>
+      <button type="button" role="tab" id="tab-fortem" aria-selected="false" aria-controls="panel-fortem">Fortem brands</button>
+      <button type="button" role="tab" id="tab-juicy" aria-selected="false" aria-controls="panel-juicy">Juicy Fest</button>
+    </div>
+
+    <div class="panel" id="panel-bybit" role="tabpanel">
+      <h3>Trading, crypto-adjacent, and institutional.</h3>
+      <p>From 2024 to 2026 Ben ran partner acquisition for Bybit: KOLs, VIP referrers, affiliates, and institutional conversations. The operating rhythm was 50 outreaches a week, each with a named proposal and a personal onboarding. Volume figures from that seat stay with Bybit. The rooms do not.</p>
+      <p><b>Influencers who already speak to traders.</b> Dubai VIP work included a partnership built around Kane Vato. Educators such as Forex Gabe sit in front of high-net-worth audiences as well as retail. These are people whose followers already open an exchange, not a general lifestyle list.</p>
+      <p><b>Crypto-adjacent traders.</b> The same motion covers the retail trader who copies a KOL, deposits, and comes back. His notes on the Bybit Learn campaign record about a fivefold lift in sign-up-to-deposit conversion against the standard page. That is a first-action problem. It is the same shape as Forum’s useful first action.</p>
+      <p><b>Institutional.</b> York Street Capital was the regulated fund path. Around it: Sydney roadshows, family-office dinners, and The Collective, a private room of founders, investors and operators, including the Bali network. The photograph above is that kind of room.</p>
+      <ul class="chips">
+        <li>KOL and VIP referrers</li>
+        <li>Kane Vato · Dubai</li>
+        <li>Forex Gabe</li>
+        <li>Retail traders</li>
+        <li>York Street Capital</li>
+        <li>Family offices</li>
+        <li>The Collective</li>
+      </ul>
+    </div>
+
+    <div class="panel" id="panel-fortem" role="tabpanel" hidden>
+      <h3>Normal markets. Retail. The culture the index is about.</h3>
+      <p>Ben was Head of Business Development at Fortem Media from 2023 to 2026. The cleared commercial line is $1.5 million and up in attributed sales. The brand environment he sold into, and that the studio produced for, includes Nike, Adidas, New Balance, Foot Locker, Under Armour, ASICS and Mercedes-Benz. New Balance, Whoop, HOKA and Red Bull Australia came toward Unofficial Run Club, the culture room Fortem owned.</p>
+      <p><b>Influencers and communities in ordinary markets.</b> Run clubs, store openings, product drops, retail campaigns. These creators do not live on a crypto timeline. They move attention around shoes, sport, cars and cities. That attention is what an attention index is trying to price.</p>
+      <p><b>Brand marketers.</b> The buyers at those companies already pay for cultural presence. They are a second conversation once Forum wants the demand side of an index, not only the trading side.</p>
+      <p><b>Retail audiences.</b> A Foot Locker opening and a New Balance race are full of people whose taste shows up in culture before it shows up in a book. Ben’s job was the commercial system that put Fortem in those rooms.</p>
+      <ul class="chips">
+        <li>Nike</li><li>Adidas</li><li>New Balance</li><li>Foot Locker</li>
+        <li>Under Armour</li><li>ASICS</li><li>Mercedes-Benz</li><li>HOKA</li><li>Whoop</li>
+      </ul>
+    </div>
+
+    <div class="panel" id="panel-juicy" role="tabpanel" hidden>
+      <h3>Talent, and the live audience.</h3>
+      <p>Juicy Fest is a hip-hop and R&amp;B tour across Australia and New Zealand, run with The RAW. Ben’s role is marketing execution and talent packaging: sponsorship decks, campaign scope, and the system around the show. The talent network itself sits with the RAW partners. He does not claim the lineup as a solo booking.</p>
+      <p>The public result: 100,000 tickets, 44,000 of them in the first four hours, eight cities. The 2025 run included Ludacris, Akon, Keyshia Cole, Fat Joe, Jeremih and Omarion.</p>
+      <p><b>What that connects.</b> Headline talent, the promoters and sponsors around a tour, and a mass audience that buys a night out because of a name. Those influencers move culture in the open. A desk that only knows crypto KOLs never meets them. A festival operator who only knows talent never gets them onto a book. The pilot uses Ben to make the introduction in both directions, one name at a time.</p>
+      <ul class="chips">
+        <li>Headline talent</li>
+        <li>Tour promoters</li>
+        <li>Sponsors</li>
+        <li>Live retail audience</li>
+        <li>8 cities · AUS / NZ</li>
+      </ul>
+    </div>
+
+    <div class="doors" aria-label="Who each room can introduce">
+      <article class="door">
+        <small>Bybit</small>
+        <strong>Size.</strong>
+        <p>Traders, VIP referrers, and institutional rooms that already know how to put capital to work.</p>
+      </article>
+      <article class="door">
+        <small>Fortem</small>
+        <strong>Culture.</strong>
+        <p>Brand marketers and retail communities around Nike, New Balance and the rest of that roster.</p>
+      </article>
+      <article class="door">
+        <small>Juicy</small>
+        <strong>Talent.</strong>
+        <p>Artists, promoters and the audience that shows up when attention is a live event.</p>
+      </article>
     </div>
   </section>
 
-  <section class="sheet ask" id="ask" data-label="06 The pilot">
-    <div class="sheet-inner">
-      <p class="kicker">06 · The ask</p>
-      <h2>Two weeks. One cohort. Then a price.</h2>
-      <p class="dek">Thirty minutes to set the pilot. Two weeks to run it. A commercial conversation only after Forum can see who acted.</p>
+  <section id="difference">
+    <p class="kicker">Leo’s read of the market</p>
+    <h2>The venue exists. The reading layer does not.</h2>
+    <p class="dek">Attention markets are continuous. A name, a product, a trend can be bought and sold as an index, rather than as a yes-or-no bet. Forum builds that index and wants the serious trader, at a distance from crypto branding. Oddpool did the institutional data job for prediction markets, for market makers, prop firms and hedge funds, and is joining Kalshi. Nobody is doing that job for attention. That is the opening.</p>
+    <p class="dek">The difference Tendex is for: a desk can see price, the attention series, and the book together, then meet the people who create the attention and the people who can size it. Forum keeps the customer who trades. Tendex keeps the screen and the introductions.</p>
+  </section>
+
+  <section id="together">
+    <p class="kicker">The pilot</p>
+    <h2>Five moves, one cohort.</h2>
+    <ol class="steps" id="steps">
+      <li class="active">
+        <button type="button"><span class="n">01</span><strong>Forum names the market.</strong><span class="detail">One index. One eligible trader. One useful first action. One owner on your side.</span></button>
+      </li>
+      <li>
+        <button type="button"><span class="n">02</span><strong>That index goes on the desk.</strong><span class="detail">Price, attention series, and book, under the data terms you set.</span></button>
+      </li>
+      <li>
+        <button type="button"><span class="n">03</span><strong>Ben opens three short lists.</strong><span class="detail">A trading or institutional name from the Bybit years. A culture or brand name from the Fortem roster. A talent or promoter name from Juicy. No paid promotion in this step.</span></button>
+      </li>
+      <li>
+        <button type="button"><span class="n">04</span><strong>Each one is onboarded in person.</strong><span class="detail">A walkthrough on Tendex, then the Forum action you defined. We record who acted and who returned.</span></button>
+      </li>
+      <li>
+        <button type="button"><span class="n">05</span><strong>We read it together.</strong><span class="detail">Introduced, qualified, acted, returned. A price comes after that note: a pilot fee, a fee per qualified activation, or a share of attributable activity.</span></button>
+      </li>
+    </ol>
+  </section>
+
+  <section id="leo">
+    <p class="kicker">Leo Chow · Keng Loon Chow</p>
+    <h2>The person who can build the screen.</h2>
+    <div class="people">
+      <article>
+        <div class="monogram" aria-hidden="true">LC</div>
+        <h3>Why the desk is his to build</h3>
+        <p class="role">Terminal, data, markets</p>
+        <p>Applied Finance and a postgraduate diploma in Applied Statistics at Macquarie. Credit-risk scorecards at the Commonwealth Bank for cards and personal loans, on books of up to 21 million rows. In 2021 he co-authored a Scientific Reports paper on a quantum-inspired classifier. The paper records that he ran and analysed the experiment. He later shipped that work as a scikit-learn package.</p>
+        <p>He traded crypto on his own account from 2020 to 2023, then went back to production systems: APIs inside Commonwealth Bank fraud and scams work, and now business-banking systems at Westpac. Tendex is that habit pointed at attention. He is the reason the pilot can put Forum on a real screen instead of a slide.</p>
+        <ul class="facts">
+          <li>Macquarie · finance and statistics</li>
+          <li>Commonwealth Bank credit-risk models, 2012–2014</li>
+          <li>Scientific Reports, 2021</li>
+          <li>Senior developer, Westpac</li>
+        </ul>
+      </article>
+      <article>
+        <h3>What he wants this market to become</h3>
+        <p class="role">The difference</p>
+        <p>A trader should not have to assemble a venue, a Google trend, and a book from three tabs. Leo’s product is one object: the index, the series it references, and the tape behind the print. Third-party raw data stays on the screen. The API carries Tendex’s own series, so Forum is not watching its feed get resold.</p>
+        <p>Paired with Ben’s rooms, the screen is how a market maker, a prop desk, or a fund meets an attention market that already has a cultural life outside crypto. That is the market they want to build with you: liquid enough to size, and legible enough to trust.</p>
+      </article>
+    </div>
+  </section>
+
+  <section id="ben">
+    <p class="kicker">Ben Killen · Growth Labs</p>
+    <h2>The person who can open the rooms.</h2>
+    <p class="dek">Distribution is the job. The Bybit seat has ended. The method is what he is offering Forum: a named person, a reason they fit, and Ben on the onboarding until they have done the action you define.</p>
+    <ul class="facts">
+      <li>Bybit partner acquisition, 2024–2026 · traders, KOLs, VIP, institutional</li>
+      <li>Fortem Media, Head of Business Development, 2023–2026 · Nike, Adidas, New Balance, Foot Locker, Mercedes-Benz and the rest of that roster</li>
+      <li>Juicy Fest with The RAW · marketing execution and talent packaging · 100,000 tickets, eight cities</li>
+      <li>Advisor, The Collective · founders, investors, operators</li>
+    </ul>
+  </section>
+
+  <section id="ask">
+    <div class="ask">
+      <p class="kicker">The ask</p>
+      <h2>Thirty minutes. One index. Three kinds of name.</h2>
+      <p class="dek">Two weeks after that. A commercial conversation only once Forum can see who acted.</p>
       <div class="ask-grid">
         <article>
           <h3>Forum</h3>
-          <p>Name the index, the trader you want, and the action that counts. Confirm what we may show on the desk.</p>
+          <p>Name the index, the trader you want, and the action that counts. Confirm what we may show.</p>
         </article>
         <article>
           <h3>Tendex</h3>
-          <p>Put that index on the terminal. Ben runs the introduction list and the onboarding. Leo keeps the data honest.</p>
+          <p>Leo puts that index on the desk. Ben brings one name from each room and stays on the onboarding.</p>
         </article>
         <article>
           <h3>After</h3>
-          <p>If the cohort acts, we price a next step in writing: a pilot fee, a fee per qualified activation, or a share of attributable activity.</p>
+          <p>If the cohort acts, we price the next step in writing.</p>
         </article>
       </div>
       <a class="mailto" href="mailto:ben@growthlabsconsulting.xyz?subject=Tendex%20pilot%20with%20Forum">Write to Ben</a>
     </div>
   </section>
-
-  <section class="sheet" id="people" data-label="07 People">
-    <div class="sheet-inner">
-      <p class="kicker">07 · Who is asking</p>
-      <h2>Two people, two jobs.</h2>
-      <p class="dek">One of us has built risk models inside a bank and the terminal on the table. The other has spent two years putting named partners onto an exchange. Forum gets both.</p>
-      <div class="people">
-        <article>
-          <div class="monogram" aria-hidden="true">LC</div>
-          <h3>Leo Chow</h3>
-          <p class="role">Keng Loon Chow · Terminal and data</p>
-          <p>Leo is trained for this screen. Applied Finance and a postgraduate diploma in Applied Statistics at Macquarie, then credit-risk scorecards at the Commonwealth Bank for cards and personal loans, on books of up to 21 million rows. In 2021 he co-authored “A quantum-inspired classifier for clonogenic assay evaluations” in Scientific Reports. The paper records that he conducted and analysed the experiment. He later shipped that line of work as a scikit-learn package.</p>
-          <p>He traded crypto on his own account from 2020 to 2023, then went back to production systems: APIs inside Commonwealth Bank fraud and scams work, and now business-banking systems at Westpac. Tendex is that habit applied to attention markets. Price, the attention series, the archived book, and an API that leaves a partner’s raw feed on the screen.</p>
-          <ul class="facts">
-            <li>Applied Finance and Applied Statistics, Macquarie</li>
-            <li>Credit-risk models, Commonwealth Bank, 2012–2014</li>
-            <li>Co-author, Scientific Reports, 2021</li>
-            <li>Senior developer, Westpac</li>
-          </ul>
-        </article>
-        <article>
-          <img class="portrait" src="assets/ben-killen.png" alt="Ben Killen">
-          <h3>Ben Killen</h3>
-          <p class="role">Distribution · Growth Labs</p>
-          <p>Ben’s job is the introduction and the follow-through. From 2024 to 2026 he built Bybit’s partner acquisition for KOLs, VIP referrers, affiliates and institutional conversations: a proposal for each segment, one CRM, and an operating cadence of 50 outreaches a week. That work can be named. The volume figures cannot, and they are not in this brief.</p>
-          <p>He founded Growth Labs and advises The Collective, a private membership of founders, investors and operators. For Forum he will use the Bybit relationships, the Gulf contacts from that Dubai-based seat, and iGaming partner work. He onboards each account himself. The seat at Bybit has ended. The method is what he is offering.</p>
-          <ul class="facts">
-            <li>Bybit partner acquisition, 2024–2026</li>
-            <li>Founder, Growth Labs</li>
-            <li>Advisor, The Collective</li>
-          </ul>
-        </article>
-      </div>
-    </div>
-  </section>
 </main>
 
-<footer class="colophon">
+<footer>
   <p>Forum keeps the venue. Tendex keeps the desk. The first book is built from people both sides can name.</p>
-  <p>Prepared 31 October 2026 from working conversations with Leo Chow. Tendex is not a Y Combinator company. Forum’s Y Combinator membership is context for who you are, and it is not an endorsement of Tendex. This page is a proposal. It is not a partnership, a client list, or an offer to trade.</p>
+  <p>Prepared 31 October 2026. Tendex is not a Y Combinator company. This page is a proposal. It is not a partnership, a client list, or an offer to trade. Bybit volume figures are omitted on purpose. Juicy’s lineup and ticket numbers are the tour’s public result. Ben’s seat there is marketing execution and talent packaging with The RAW.</p>
 </footer>
-
-<nav class="deck-nav" aria-label="Move through the brief">
-  <button type="button" id="prev">Prev</button>
-  <button type="button" id="next">Next</button>
-</nav>
 
 <script>
 (function () {
-  var sections = Array.prototype.slice.call(document.querySelectorAll("section.sheet"));
-  var links = Array.prototype.slice.call(document.querySelectorAll(".rail a"));
-  var label = document.getElementById("progress-label");
-  var dots = document.getElementById("dots");
-  var index = 0;
-
-  sections.forEach(function (section, i) {
-    var dot = document.createElement("button");
-    dot.type = "button";
-    dot.setAttribute("aria-label", section.dataset.label);
-    dot.addEventListener("click", function () { go(i); });
-    dots.appendChild(dot);
+  var root = document.documentElement;
+  var themeBtn = document.getElementById("theme");
+  function paintTheme() {
+    var dark = root.getAttribute("data-theme") === "dark";
+    themeBtn.setAttribute("aria-pressed", dark ? "true" : "false");
+    themeBtn.textContent = dark ? "Light mode" : "Dark mode";
+  }
+  paintTheme();
+  themeBtn.addEventListener("click", function () {
+    var next = root.getAttribute("data-theme") === "dark" ? "light" : "dark";
+    root.setAttribute("data-theme", next);
+    try { localStorage.setItem("tendex-theme", next); } catch (e) {}
+    paintTheme();
   });
 
-  function go(i) {
-    index = Math.max(0, Math.min(sections.length - 1, i));
-    sections[index].scrollIntoView({ behavior: "smooth", block: "start" });
-  }
-
-  function paint() {
-    var mid = window.scrollY + window.innerHeight * 0.35;
-    sections.forEach(function (section, i) {
-      if (section.offsetTop <= mid) index = i;
-    });
-    if (label) label.textContent = sections[index].dataset.label;
-    links.forEach(function (link, i) {
-      if (i === index) link.setAttribute("aria-current", "true");
-      else link.removeAttribute("aria-current");
-    });
-    Array.prototype.forEach.call(dots.children, function (dot, i) {
-      dot.setAttribute("aria-current", i === index ? "true" : "false");
-    });
-  }
-
-  document.getElementById("prev").addEventListener("click", function () { go(index - 1); });
-  document.getElementById("next").addEventListener("click", function () { go(index + 1); });
-  window.addEventListener("scroll", paint, { passive: true });
-  paint();
-
-  document.addEventListener("keydown", function (event) {
-    var tag = document.activeElement && document.activeElement.tagName;
-    if (tag === "INPUT" || tag === "TEXTAREA") return;
-    if (event.key === "ArrowRight" || event.key === "ArrowDown") {
-      if (event.key === "ArrowDown" && event.target === document.body) return;
-      if (event.key === "ArrowRight") { event.preventDefault(); go(index + 1); }
-    }
-    if (event.key === "ArrowLeft") { event.preventDefault(); go(index - 1); }
-  });
-
-  var tabs = [
-    ["tab-screen", "panel-screen"],
-    ["tab-tape", "panel-tape"],
-    ["tab-api", "panel-api"]
-  ];
-  tabs.forEach(function (pair) {
-    document.getElementById(pair[0]).addEventListener("click", function () {
+  var tabs = ["bybit", "fortem", "juicy"];
+  tabs.forEach(function (name) {
+    document.getElementById("tab-" + name).addEventListener("click", function () {
       tabs.forEach(function (other) {
-        var on = other[0] === pair[0];
-        var tab = document.getElementById(other[0]);
-        var panel = document.getElementById(other[1]);
-        tab.setAttribute("aria-selected", on ? "true" : "false");
-        panel.hidden = !on;
+        var on = other === name;
+        document.getElementById("tab-" + other).setAttribute("aria-selected", on ? "true" : "false");
+        document.getElementById("panel-" + other).hidden = !on;
       });
     });
-  });
-
-  document.getElementById("benefits").addEventListener("click", function (event) {
-    var button = event.target.closest("button");
-    if (!button) return;
-    var item = button.parentElement;
-    var open = item.classList.contains("open");
-    Array.prototype.forEach.call(item.parentElement.children, function (li) {
-      li.classList.remove("open");
-      li.querySelector("button").setAttribute("aria-expanded", "false");
-      li.querySelector(".plus").textContent = "+";
-    });
-    if (!open) {
-      item.classList.add("open");
-      button.setAttribute("aria-expanded", "true");
-      item.querySelector(".plus").textContent = "–";
-    }
-  });
-
-  var status = document.getElementById("desk-status");
-  var deskCopy = {
-    makers: "Market makers: the first list is desks that quote size. We introduce them to one Forum index with the book and the attention series already on the screen.",
-    prop: "Prop firms: the first list is pods that already run a daily process. We give them one watchlist and one action on Forum, then record whether they come back.",
-    funds: "Hedge funds: the first list is research seats that already track a theme. Attention sits beside that theme. Forum is where the index trades."
-  };
-  document.querySelector(".desks").addEventListener("click", function (event) {
-    var button = event.target.closest(".desk");
-    if (!button) return;
-    document.querySelectorAll(".desk").forEach(function (desk) {
-      desk.setAttribute("aria-pressed", desk === button ? "true" : "false");
-    });
-    status.textContent = deskCopy[button.dataset.desk];
   });
 
   document.getElementById("steps").addEventListener("click", function (event) {
@@ -928,20 +591,33 @@
     });
   });
 
-  function series(id, dot, on) {
+  function series(id, on) {
     document.getElementById(id).style.opacity = on ? "1" : "0.15";
-    document.getElementById(dot).style.opacity = on ? "1" : "0.15";
   }
   document.getElementById("toggle-price").addEventListener("click", function () {
     var on = this.getAttribute("aria-pressed") !== "true";
     this.setAttribute("aria-pressed", on ? "true" : "false");
-    series("series-price", "dot-price", on);
+    series("series-price", on);
   });
   document.getElementById("toggle-attention").addEventListener("click", function () {
     var on = this.getAttribute("aria-pressed") !== "true";
     this.setAttribute("aria-pressed", on ? "true" : "false");
-    series("series-attention", "dot-attention", on);
+    series("series-attention", on);
   });
+
+  var links = Array.prototype.slice.call(document.querySelectorAll(".top nav a"));
+  var sections = links.map(function (link) { return document.querySelector(link.getAttribute("href")); });
+  function mark() {
+    var mid = window.scrollY + 120;
+    var current = 0;
+    sections.forEach(function (section, i) { if (section && section.offsetTop <= mid) current = i; });
+    links.forEach(function (link, i) {
+      if (i === current) link.setAttribute("aria-current", "true");
+      else link.removeAttribute("aria-current");
+    });
+  }
+  window.addEventListener("scroll", mark, { passive: true });
+  mark();
 })();
 </script>
 </body>
