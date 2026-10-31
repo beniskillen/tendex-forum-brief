@@ -125,10 +125,27 @@ try {
   h1 { font-size: clamp(2.6rem, 6vw, 4.6rem); line-height: 0.98; max-width: 14ch; }
   h2 { font-size: clamp(1.8rem, 3.5vw, 2.8rem); line-height: 1.05; max-width: 18ch; }
   .dek { max-width: 40rem; color: var(--soft); font-size: 1.125rem; margin: 16px 0 0; }
-  .hero { display: grid; gap: 36px; align-items: end; padding-top: 48px; }
+  .hero { display: grid; gap: 36px; align-items: center; padding-top: 48px; }
   .shot { margin: 0; }
-  .shot img { width: 100%; height: auto; border-radius: 12px; border: 1px solid var(--line); }
-  .shot figcaption { margin-top: 8px; color: var(--muted); font-size: 13px; }
+  .shot img, .portrait {
+    width: 100%;
+    height: auto;
+    border-radius: 12px;
+    border: 1px solid var(--line);
+    display: block;
+  }
+  .portrait { width: 168px; height: 168px; object-fit: cover; object-position: center 20%; }
+  .shot figcaption, .who figcaption { margin-top: 8px; color: var(--muted); font-size: 13px; }
+  .record { display: grid; gap: 12px; margin-top: 22px; }
+  .record article {
+    border: 1px solid var(--line);
+    background: var(--card);
+    border-radius: 12px;
+    padding: 16px;
+  }
+  .record h3 { font-size: 1.15rem; margin-bottom: 8px; }
+  .record p { margin: 0; color: var(--soft); font-size: 0.98rem; }
+  .record a { color: var(--ink); }
 
   .meta {
     display: grid;
@@ -283,15 +300,8 @@ try {
   }
 
   .people { display: grid; gap: 28px; }
-  .people article { border-top: 1px solid var(--line); padding-top: 16px; }
-  .monogram {
-    width: 72px; height: 72px;
-    display: flex; align-items: center; justify-content: center;
-    border: 1px solid var(--ink);
-    border-radius: 12px;
-    font-size: 1.4rem;
-    margin-bottom: 12px;
-  }
+  .who { border-top: 1px solid var(--line); padding-top: 16px; }
+  .who p { margin: 10px 0 0; color: var(--soft); }
   .role { font-family: var(--mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); margin: 6px 0 10px; }
   .facts { list-style: none; margin: 12px 0 0; padding: 0; color: var(--muted); font-size: 14px; }
   .facts li { padding: 6px 0; border-top: 1px solid var(--line); }
@@ -310,9 +320,10 @@ try {
   @media (min-width: 880px) {
     .hero { grid-template-columns: 1.05fr 0.95fr; }
     .meta { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+    .record { grid-template-columns: 1fr 1fr; }
     .doors { grid-template-columns: repeat(3, 1fr); }
     .ask-grid { grid-template-columns: repeat(3, 1fr); }
-    .people { grid-template-columns: 1fr 1fr; }
+    .people { grid-template-columns: 1.25fr 0.85fr; align-items: start; }
   }
 </style>
 </head>
@@ -330,11 +341,10 @@ try {
   </a>
   <nav aria-label="Brief">
     <a href="#opening">Opening</a>
-    <a href="#terminal">Desk</a>
+    <a href="#builder">Leo</a>
     <a href="#rooms">Rooms</a>
-    <a href="#leo">Leo</a>
-    <a href="#ben">Ben</a>
     <a href="#ask">Ask</a>
+    <a href="#people">People</a>
   </nav>
   <button class="theme" id="theme" type="button" aria-pressed="false">Dark mode</button>
 </header>
@@ -343,8 +353,8 @@ try {
   <section class="hero" id="opening">
     <div>
       <p class="kicker">For Forum Markets Group · 31 October 2026</p>
-      <h1>Build the book with the rooms that already have the attention.</h1>
-      <p class="dek">Tendex is the research terminal for attention markets. Forum keeps the index and the exchange. This brief is a two-week pilot: your market on our desk, and introductions from three rooms Ben already works — trading, retail brands, and live talent.</p>
+      <h1>A desk for the index. Then the rooms that can fill it.</h1>
+      <p class="dek">Leo Chow built Tendex, the research terminal for attention markets. Forum keeps the index and the exchange. This brief is a two-week pilot: your market on that desk, then one introduction from each of three rooms — trading, retail brands, and live talent.</p>
       <ul class="meta">
         <li><span>From</span>Leo Chow and Ben Killen</li>
         <li><span>To</span>Forum Markets Group</li>
@@ -352,17 +362,7 @@ try {
         <li><span>Buyer</span>Desks, and the culture around them</li>
       </ul>
     </div>
-    <figure class="shot">
-      <img src="assets/ben-bybit.jpg" alt="Ben Killen on stage for Bybit, presenting a fund product to a room.">
-      <figcaption>Ben, on stage for Bybit, walking a room through a fund. The slide is the fund’s. The point is the room.</figcaption>
-    </figure>
-  </section>
-
-  <section id="terminal">
-    <p class="kicker">The desk · same module as the terminal</p>
-    <h2>Price, the attention series, and the venue on one row.</h2>
-    <p class="dek">This is the screen a trader already understands. Each market carries its venue, its price, and the attention series it references. Forum is the venue we want on that row, on your terms. The figures below are a sample of the layout.</p>
-    <div class="terminal" style="margin-top:22px">
+    <div class="terminal" id="terminal">
       <div class="chart-wrap">
         <svg class="chart" viewBox="0 0 640 180" role="img" aria-label="Sample price and attention series.">
           <g stroke="currentColor" opacity="0.15">
@@ -382,7 +382,31 @@ try {
       <div class="row"><b>Cultural index</b><span class="venue">Forum</span><span class="up">—</span><span class="flat">series</span></div>
       <div class="row"><b>Attention market</b><span class="venue">Polymarket</span><span class="up">live on desk</span><span class="flat">overlaid</span></div>
       <div class="row"><b>Book and tape</b><span class="venue">Archived</span><span class="up">replay</span><span class="flat">aligned</span></div>
-      <p class="note">Sample drawing. Not a live print and not a performance claim. Raw partner feeds stay on the screen and out of the API.</p>
+      <p class="note">Sample drawing of the desk Leo built. Not a live print and not a performance claim. Raw partner feeds stay on the screen and out of the API.</p>
+    </div>
+  </section>
+
+  <section id="builder">
+    <p class="kicker">Leo Chow · the person who can build the screen</p>
+    <h2>Sixteen years from a scorecard to a terminal.</h2>
+    <p class="dek">The desk is not a slide. It is the same habit he has already used on bank books, a published classifier, and production APIs. On 25 October he wrote the founder record down so it could be checked. The public trail matches the letter.</p>
+    <div class="record">
+      <article>
+        <h3>Finance, then statistics.</h3>
+        <p>Bachelor of Applied Finance at Macquarie, 2007. Postgraduate diploma in Applied Statistics, 2020. A professor wrote that his High Distinction in multivariate analysis showed statistical intuition, not only the mathematics. He tutored first-year statistics at Macquarie, and spent 2010 to 2011 in investment operations at Macquarie Group.</p>
+      </article>
+      <article>
+        <h3>Models on a real book.</h3>
+        <p>Scorecard analyst at the Commonwealth Bank, 2012 to 2014, on credit cards and personal loans. Books of up to 21 million rows, in SAS. In 2021 <a href="https://www.nature.com/articles/s41598-021-82085-8">Scientific Reports</a> published “A quantum-inspired classifier for clonogenic assay evaluations.” The paper records that Keng Loon Chow conducted and analysed the experiment. He shipped the method as a scikit-learn package.</p>
+      </article>
+      <article>
+        <h3>A market, then the bank systems again.</h3>
+        <p>He traded crypto on his own account from 2020 to 2023. He then went back to production: at Synechron he built APIs inside Commonwealth Bank fraud and scams work, including the React surface those APIs feed. He is now a senior developer at Westpac, on business banking.</p>
+      </article>
+      <article>
+        <h3>What he put in the email.</h3>
+        <p>First place at the OpenD/I Hackathon 2023, for a distributed training system. Top six at the SXSW Sydney 2023 AI Agent Hackathon. The package he pointed to, <a href="https://github.com/leockl/tool-ahead-of-time">tool-ahead-of-time</a>, is public and has 116 GitHub stars. It adds tool calling for a newly released model on LangChain before the framework supports it. The desk is that kind of work, pointed at an attention index.</p>
+      </article>
     </div>
   </section>
 
@@ -401,7 +425,7 @@ try {
       <p>From 2024 to 2026 Ben ran partner acquisition for Bybit: KOLs, VIP referrers, affiliates, and institutional conversations. The operating rhythm was 50 outreaches a week, each with a named proposal and a personal onboarding. Volume figures from that seat stay with Bybit. The rooms do not.</p>
       <p><b>Influencers who already speak to traders.</b> Dubai VIP work included a partnership built around Kane Vato. Educators such as Forex Gabe sit in front of high-net-worth audiences as well as retail. These are people whose followers already open an exchange, not a general lifestyle list.</p>
       <p><b>Crypto-adjacent traders.</b> The same motion covers the retail trader who copies a KOL, deposits, and comes back. His notes on the Bybit Learn campaign record about a fivefold lift in sign-up-to-deposit conversion against the standard page. That is a first-action problem. It is the same shape as Forum’s useful first action.</p>
-      <p><b>Institutional.</b> York Street Capital was the regulated fund path. Around it: Sydney roadshows, family-office dinners, and The Collective, a private room of founders, investors and operators, including the Bali network. The photograph above is that kind of room.</p>
+      <p><b>Institutional.</b> York Street Capital was the regulated fund path. Around it: Sydney roadshows, family-office dinners, and The Collective, a private room of founders, investors and operators, including the Bali network. That is the institutional room, separate from the retail trader who follows a KOL.</p>
       <ul class="chips">
         <li>KOL and VIP referrers</li>
         <li>Kane Vato · Dubai</li>
@@ -487,44 +511,6 @@ try {
     </ol>
   </section>
 
-  <section id="leo">
-    <p class="kicker">Leo Chow · Keng Loon Chow</p>
-    <h2>The person who can build the screen.</h2>
-    <div class="people">
-      <article>
-        <div class="monogram" aria-hidden="true">LC</div>
-        <h3>Why the desk is his to build</h3>
-        <p class="role">Terminal, data, markets</p>
-        <p>Applied Finance and a postgraduate diploma in Applied Statistics at Macquarie. Credit-risk scorecards at the Commonwealth Bank for cards and personal loans, on books of up to 21 million rows. In 2021 he co-authored a Scientific Reports paper on a quantum-inspired classifier. The paper records that he ran and analysed the experiment. He later shipped that work as a scikit-learn package.</p>
-        <p>He traded crypto on his own account from 2020 to 2023, then went back to production systems: APIs inside Commonwealth Bank fraud and scams work, and now business-banking systems at Westpac. Tendex is that habit pointed at attention. He is the reason the pilot can put Forum on a real screen instead of a slide.</p>
-        <ul class="facts">
-          <li>Macquarie · finance and statistics</li>
-          <li>Commonwealth Bank credit-risk models, 2012–2014</li>
-          <li>Scientific Reports, 2021</li>
-          <li>Senior developer, Westpac</li>
-        </ul>
-      </article>
-      <article>
-        <h3>What he wants this market to become</h3>
-        <p class="role">The difference</p>
-        <p>A trader should not have to assemble a venue, a Google trend, and a book from three tabs. Leo’s product is one object: the index, the series it references, and the tape behind the print. Third-party raw data stays on the screen. The API carries Tendex’s own series, so Forum is not watching its feed get resold.</p>
-        <p>Paired with Ben’s rooms, the screen is how a market maker, a prop desk, or a fund meets an attention market that already has a cultural life outside crypto. That is the market they want to build with you: liquid enough to size, and legible enough to trust.</p>
-      </article>
-    </div>
-  </section>
-
-  <section id="ben">
-    <p class="kicker">Ben Killen · Growth Labs</p>
-    <h2>The person who can open the rooms.</h2>
-    <p class="dek">Distribution is the job. The Bybit seat has ended. The method is what he is offering Forum: a named person, a reason they fit, and Ben on the onboarding until they have done the action you define.</p>
-    <ul class="facts">
-      <li>Bybit partner acquisition, 2024–2026 · traders, KOLs, VIP, institutional</li>
-      <li>Fortem Media, Head of Business Development, 2023–2026 · Nike, Adidas, New Balance, Foot Locker, Mercedes-Benz and the rest of that roster</li>
-      <li>Juicy Fest with The RAW · marketing execution and talent packaging · 100,000 tickets, eight cities</li>
-      <li>Advisor, The Collective · founders, investors, operators</li>
-    </ul>
-  </section>
-
   <section id="ask">
     <div class="ask">
       <p class="kicker">The ask</p>
@@ -545,6 +531,41 @@ try {
         </article>
       </div>
       <a class="mailto" href="mailto:ben@growthlabsconsulting.xyz?subject=Tendex%20pilot%20with%20Forum">Write to Ben</a>
+    </div>
+  </section>
+
+  <section id="people">
+    <p class="kicker">The people</p>
+    <h2>One builds the desk. One opens the rooms.</h2>
+    <div class="people">
+      <article class="who">
+        <figure class="shot">
+          <img class="portrait" src="assets/leo-chow.jpg" alt="Leo Chow, also Keng Loon Chow.">
+          <figcaption>Leo Chow · Keng Loon Chow · Sydney</figcaption>
+        </figure>
+        <p>The record above is the work. The screen is one object: the index, the series it references, and the tape behind the print. Third-party raw data stays on the screen. The API carries Tendex’s own series, so Forum is not watching its feed get resold.</p>
+        <ul class="facts">
+          <li>Macquarie · Applied Finance and Applied Statistics</li>
+          <li>Commonwealth Bank scorecards, 2012–2014 · up to 21 million rows</li>
+          <li>Scientific Reports, 2021 · scikit-learn package</li>
+          <li>OpenD/I Hackathon 2023, first place · SXSW Sydney 2023, top six</li>
+          <li>tool-ahead-of-time · 116 GitHub stars</li>
+          <li>Senior developer, Westpac · business banking</li>
+        </ul>
+      </article>
+      <article class="who">
+        <figure class="shot">
+          <img src="assets/ben-bybit.jpg" alt="Ben Killen on stage for Bybit, presenting a fund product to a room.">
+          <figcaption>Ben Killen · Growth Labs. On stage for Bybit. The slide is the fund’s. The point is the room.</figcaption>
+        </figure>
+        <p>Distribution is the job. The Bybit seat has ended. The method is a named person, a reason they fit, and Ben on the onboarding until they have done the action Forum defines.</p>
+        <ul class="facts">
+          <li>Bybit partner acquisition, 2024–2026 · traders, KOLs, VIP, institutional</li>
+          <li>Fortem Media, Head of Business Development, 2023–2026</li>
+          <li>Juicy Fest with The RAW · marketing execution and talent packaging</li>
+          <li>Advisor, The Collective</li>
+        </ul>
+      </article>
     </div>
   </section>
 </main>
