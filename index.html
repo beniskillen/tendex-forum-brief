@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Tendex for Forum</title>
-<meta name="description" content="A brief from Tendex to Forum Markets Group: the research terminal for attention markets, and the rooms that can fill the first book.">
+<meta name="description" content="Tendex is the data terminal for attention markets: price, the attention series a market settles on, and the saved book.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Outfit:wght@400;500;600&display=swap" rel="stylesheet">
@@ -122,8 +122,8 @@ try {
     color: var(--amber);
   }
   h1, h2, h3 { font-weight: 500; letter-spacing: -0.035em; margin: 0; }
-  h1 { font-size: clamp(2.6rem, 6vw, 4.6rem); line-height: 0.98; max-width: 14ch; }
-  h2 { font-size: clamp(1.8rem, 3.5vw, 2.8rem); line-height: 1.05; max-width: 18ch; }
+  h1 { font-size: clamp(2.6rem, 6vw, 4.4rem); line-height: 0.98; max-width: 16ch; }
+  h2 { font-size: clamp(1.8rem, 3.5vw, 2.6rem); line-height: 1.08; max-width: 22ch; }
   .dek { max-width: 40rem; color: var(--soft); font-size: 1.125rem; margin: 16px 0 0; }
   .hero { display: grid; gap: 36px; align-items: center; padding-top: 48px; }
   .shot { margin: 0; }
@@ -145,8 +145,28 @@ try {
     padding: 16px;
   }
   .record h3 { font-size: 1.15rem; margin-bottom: 8px; }
-  .record p { margin: 0; color: var(--soft); font-size: 0.98rem; }
+  .record p, .layers p, .flow p { margin: 0; color: var(--soft); font-size: 0.98rem; }
   .record a { color: var(--ink); }
+  .record small, .layers small, .flow small {
+    display: block;
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--amber);
+    margin-bottom: 8px;
+  }
+  .layers { display: grid; gap: 12px; margin-top: 22px; }
+  .layers article, .flow li {
+    border: 1px solid var(--line);
+    background: var(--card);
+    border-radius: 12px;
+    padding: 16px;
+    min-width: 0;
+  }
+  .layers h3 { font-size: 1.35rem; margin-bottom: 8px; letter-spacing: -0.03em; }
+  .flow { display: grid; gap: 12px; margin: 22px 0 0; padding: 0; list-style: none; }
+  .flow strong { display: block; font-weight: 500; font-size: 1.15rem; letter-spacing: -0.03em; margin-bottom: 6px; }
 
   .meta {
     display: grid;
@@ -322,6 +342,7 @@ try {
     .hero { grid-template-columns: 1.05fr 0.95fr; }
     .meta { grid-template-columns: repeat(4, minmax(0, 1fr)); }
     .record { grid-template-columns: 1fr 1fr; }
+    .layers, .flow { grid-template-columns: repeat(3, 1fr); }
     .doors { grid-template-columns: repeat(3, 1fr); }
     .ask-grid { grid-template-columns: repeat(3, 1fr); }
     .people { grid-template-columns: 1.25fr 0.85fr; align-items: start; }
@@ -342,7 +363,7 @@ try {
   </a>
   <nav aria-label="Brief">
     <a href="#opening">Opening</a>
-    <a href="#builder">Leo</a>
+    <a href="#product">Desk</a>
     <a href="#rooms">Rooms</a>
     <a href="#ask">Ask</a>
     <a href="#people">People</a>
@@ -353,8 +374,8 @@ try {
 <main>
   <section class="hero" id="opening">
     <div>
-      <h1>A desk for the index. Then the rooms that can fill it.</h1>
-      <p class="dek">Leo Chow built Tendex, the research terminal for attention markets. Forum keeps the index and the exchange. This is a two-week pilot: your market on that desk, then one introduction from each of three rooms: trading, retail brands, and live talent.</p>
+      <h1>One terminal for the price, the score, and the book.</h1>
+      <p class="dek">Tendex is the data terminal for attention markets. Each market’s price sits on the attention series it settles on, with the order book and the trade tape saved beside it. Polymarket is on the desk today. Forum is the index we want on the next row.</p>
     </div>
     <div class="terminal" id="terminal">
       <div class="chart-wrap">
@@ -373,38 +394,54 @@ try {
       <header>
         <span>Market</span><span>Venue</span><span>Price</span><span>Attention</span>
       </header>
-      <div class="row"><b>Cultural index</b><span class="venue">Forum</span><span class="up">—</span><span class="flat">series</span></div>
+      <div class="row"><b>Forum index</b><span class="venue">Forum</span><span class="up">to add</span><span class="flat">your series</span></div>
       <div class="row"><b>Attention market</b><span class="venue">Polymarket</span><span class="up">live on desk</span><span class="flat">overlaid</span></div>
       <div class="row"><b>Book and tape</b><span class="venue">Archived</span><span class="up">replay</span><span class="flat">aligned</span></div>
     </div>
   </section>
 
-  <section id="builder">
-    <h2>Sixteen years from a scorecard to a terminal.</h2>
-    <p class="dek">Leo Chow has already done this kind of work on bank books, a published classifier, and production APIs.</p>
-    <div class="record">
+  <section id="product">
+    <h2>The score, the tape, and the venue, on one screen.</h2>
+    <p class="dek">A trader currently keeps the market in one tab and the attention chart in another. Tendex is the screen that holds both, and keeps the book.</p>
+    <div class="layers">
       <article>
-        <h3>Finance, then statistics.</h3>
-        <p>Bachelor of Applied Finance at Macquarie, 2007. Postgraduate diploma in Applied Statistics, 2020, with a High Distinction in multivariate analysis. He tutored first-year statistics at Macquarie, and spent 2010 to 2011 in investment operations at Macquarie Group.</p>
+        <small>Signal</small>
+        <h3>Price, laid over the series it settles on.</h3>
+        <p>Every row carries the market price and the attention series that market pays out on. A desk can see whether the print and the score moved together.</p>
       </article>
       <article>
-        <h3>Models on a real book.</h3>
-        <p>Scorecard analyst at the Commonwealth Bank, 2012 to 2014, on credit cards and personal loans, with books of up to 21 million rows, in SAS. In 2021 <a href="https://www.nature.com/articles/s41598-021-82085-8">Scientific Reports</a> published “A quantum-inspired classifier for clonogenic assay evaluations.” Keng Loon Chow conducted and analysed the experiment, then shipped the method as a scikit-learn package.</p>
+        <small>Tape</small>
+        <h3>The book and the trades, saved with that series.</h3>
+        <p>Tendex archives the order book and the trade tape and lines them up in time with the attention series. A desk can replay the whole move.</p>
       </article>
       <article>
-        <h3>A market, then the bank systems again.</h3>
-        <p>He traded crypto on his own account from 2020 to 2023. He then went back to production: at Synechron he built APIs inside Commonwealth Bank fraud and scams work, including the React surface those APIs feed. He is now a senior developer at Westpac, on business banking.</p>
-      </article>
-      <article>
-        <h3>Hackathons and the package.</h3>
-        <p>First place at the OpenD/I Hackathon 2023, for a distributed training system. Top six at the SXSW Sydney 2023 AI Agent Hackathon. <a href="https://github.com/leockl/tool-ahead-of-time">tool-ahead-of-time</a> is public and has 116 GitHub stars. It adds tool calling for a newly released model on LangChain before the framework supports it.</p>
+        <small>Access</small>
+        <h3>One list of markets. The series in your own system.</h3>
+        <p>Each market is tagged with the exchange it trades on. Polymarket attention markets are on the desk now. The API lets a desk pull Tendex’s own series into a model. A partner’s raw feed is not resold through it.</p>
       </article>
     </div>
+    <ol class="flow">
+      <li>
+        <small>01</small>
+        <strong>The venue publishes the market.</strong>
+        <p>Polymarket is connected. Forum’s index is the one we want added, on your terms.</p>
+      </li>
+      <li>
+        <small>02</small>
+        <strong>Tendex lines up price, score, and book.</strong>
+        <p>The series the market settles on sits on the same axis as the price. The tape is stored with it.</p>
+      </li>
+      <li>
+        <small>03</small>
+        <strong>A desk reads it, or pulls the series.</strong>
+        <p>On the screen, or through the API, into the model the desk already runs.</p>
+      </li>
+    </ol>
   </section>
 
   <section id="rooms">
-    <h2>The connections are different in each room.</h2>
-    <p class="dek">Forum’s index prices cultural attention, and it needs people who can trade size. Ben’s work already sits in both places.</p>
+    <h2>The screen is ready. The first book still needs names.</h2>
+    <p class="dek">Forum’s index prices cultural attention. These three rooms are where the first traders, brand buyers, and live audiences already are.</p>
     <div class="switch" role="tablist" aria-label="Rooms">
       <button type="button" role="tab" id="tab-bybit" aria-selected="true" aria-controls="panel-bybit">Bybit</button>
       <button type="button" role="tab" id="tab-fortem" aria-selected="false" aria-controls="panel-fortem">Fortem brands</button>
@@ -455,8 +492,8 @@ try {
   </section>
 
   <section id="difference">
-    <h2>The venue exists. The reading layer does not.</h2>
-    <p class="dek">A name, a product or a trend trades as a continuous index. Forum builds that index and wants the serious trader, without the crypto branding. Oddpool did the institutional data job for prediction markets, for market makers, prop firms and hedge funds, and is joining Kalshi. Tendex is the screen for attention: price, the attention series, and the book together, plus the people who create the attention and the people who can size it. Forum keeps the customer who trades. Tendex keeps the screen and the introductions.</p>
+    <h2>Your index, on that row.</h2>
+    <p class="dek">A name, a product, or a trend trades as a continuous index. Forum builds that index and the exchange, for serious traders, and keeps the brand away from crypto. Oddpool did this data job for prediction markets, for market makers, prop firms, and hedge funds, and is joining Kalshi. Tendex does it for attention. Forum keeps the customer who trades. Tendex keeps the screen, and brings the first names to it.</p>
   </section>
 
   <section id="together">
@@ -510,7 +547,7 @@ try {
           <img class="portrait" src="assets/leo-chow.jpg" alt="Leo Chow.">
         </figure>
         <h3>Leo Chow</h3>
-        <p>The screen shows the index, the series it references, and the tape behind the print. The API carries Tendex’s own series.</p>
+        <p>He built the terminal. Applied Finance and Applied Statistics at Macquarie, credit-risk scorecards at the Commonwealth Bank on books of up to 21 million rows, then a Scientific Reports paper whose experiment he ran. He traded crypto on his own account from 2020 to 2023, built APIs inside Commonwealth Bank fraud and scams work, and is now a senior developer at Westpac.</p>
         <ul class="facts">
           <li>Macquarie · Applied Finance and Applied Statistics</li>
           <li>Commonwealth Bank scorecards, 2012–2014 · up to 21 million rows</li>
