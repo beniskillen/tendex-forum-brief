@@ -114,7 +114,7 @@ try {
   main { max-width: 1080px; margin: 0 auto; padding: 0 22px 80px; }
   section { padding: 72px 0; border-bottom: 1px solid var(--line); scroll-margin-top: 72px; }
   .kicker {
-    margin: 0 0 12px;
+    margin: 36px 0 12px;
     font-family: var(--mono);
     font-size: 12px;
     letter-spacing: 0.08em;
@@ -171,6 +171,46 @@ try {
   .layers li { margin: 0 0 8px; }
   .flow { display: grid; gap: 12px; margin: 22px 0 0; padding: 0; list-style: none; }
   .flow strong { display: block; font-weight: 500; font-size: 1.15rem; letter-spacing: -0.03em; margin-bottom: 6px; }
+
+  .path, .stats, .venues { display: grid; gap: 12px; margin: 22px 0 0; padding: 0; list-style: none; }
+  .path li, .stats li, .venues li, .ledger article {
+    border: 1px solid var(--line);
+    background: var(--card);
+    border-radius: 12px;
+    padding: 16px;
+    min-width: 0;
+  }
+  .path small, .ledger small, .venues small {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--amber);
+  }
+  .path strong, .venues strong { display: block; margin-top: 8px; font-weight: 500; font-size: 1.2rem; letter-spacing: -0.03em; }
+  .path span, .venues span { display: block; margin-top: 4px; color: var(--soft); }
+  .stats { grid-template-columns: 1fr 1fr; }
+  .stats b {
+    display: block;
+    font-size: clamp(2rem, 4vw, 2.8rem);
+    font-weight: 500;
+    letter-spacing: -0.045em;
+    line-height: 0.95;
+    color: var(--blue-ink);
+  }
+  .stats span { display: block; margin-top: 8px; color: var(--soft); font-size: 0.95rem; }
+  .ledger { display: grid; gap: 12px; margin-top: 22px; }
+  .ledger ul { margin: 12px 0 0; padding: 0; list-style: none; }
+  .ledger li { padding: 10px 0; border-top: 1px solid var(--line); color: var(--soft); }
+  .figure { margin: 0 0 8px; }
+  .figure b {
+    font-size: clamp(2rem, 4vw, 2.6rem);
+    font-weight: 500;
+    letter-spacing: -0.045em;
+    color: var(--blue-ink);
+    line-height: 1;
+  }
+  .figure span { display: block; color: var(--muted); font-size: 0.95rem; margin-top: 4px; }
 
   .meta {
     display: grid;
@@ -346,7 +386,9 @@ try {
     .hero { grid-template-columns: 1.05fr 0.95fr; }
     .meta { grid-template-columns: repeat(4, minmax(0, 1fr)); }
     .record { grid-template-columns: 1fr 1fr; }
-    .layers, .flow { grid-template-columns: repeat(3, 1fr); }
+    .layers, .flow, .venues { grid-template-columns: repeat(3, 1fr); }
+    .path, .stats { grid-template-columns: repeat(4, 1fr); }
+    .ledger { grid-template-columns: 1fr 1fr; }
     .doors { grid-template-columns: repeat(3, 1fr); }
     .ask-grid { grid-template-columns: repeat(3, 1fr); }
     .people { grid-template-columns: 1.25fr 0.85fr; align-items: start; }
@@ -407,71 +449,66 @@ try {
 
   <section id="product">
     <h2>Built for institutional desks.</h2>
-    <p class="dek">Market makers, prop trading firms, and hedge funds and research. These three are the market Tendex starts with, and the clients Forum’s book is worth the most on.</p>
+    <p class="dek">Market makers, prop firms, and hedge funds. Tendex starts here, because this is the flow Forum gets paid on.</p>
     <div class="layers">
       <article>
         <small>Market makers</small>
         <h3>Quote off the series and the book.</h3>
-        <ul>
-          <li>Price and the attention series sit on one axis, so the quote is checked against both.</li>
-          <li>Size from saved book depth.</li>
-          <li>Replay a move with the series and the tape in the same time.</li>
-        </ul>
+        <p>Price and the attention series on one axis. Size from the saved book. Replay the move.</p>
       </article>
       <article>
         <small>Prop trading firms</small>
         <h3>See the depth before you size.</h3>
-        <ul>
-          <li>Read the book before the order, so the edge is still there at the quote.</li>
-          <li>Each saved trade sits in time with the attention series.</li>
-          <li>One list of attention markets, tagged by venue. Polymarket is connected.</li>
-        </ul>
+        <p>Book depth before the order. Each trade sits in time with the attention series. Polymarket is connected.</p>
       </article>
       <article>
         <small>Hedge funds and research</small>
-        <h3>A series you can cite, and a book you can rerun.</h3>
-        <ul>
-          <li>A continuous series for a name, a product, or a trend, next to the market.</li>
-          <li>The order book history is the part a venue does not leave open.</li>
-          <li>Pull Tendex’s series into your own model. Raw partner feeds stay off the API.</li>
-        </ul>
+        <h3>A series for your own model.</h3>
+        <p>Pull Tendex’s series into the model you already run. Raw partner feeds stay off the API.</p>
       </article>
     </div>
-    <div class="prose">
-      <p>The screen is what those clients already expect. A market maker quotes off the series and the book. A prop firm reads depth before it sizes. A fund or a research desk pulls the series into its own model. That is the platform Forum’s most valuable clients are interested in.</p>
-      <p>The way in starts from work already done. Leo builds the screen from institutional finance: Applied Finance, credit-risk scorecards at the Commonwealth Bank, and business banking at Westpac. Ben opens the door from the institutional side of an exchange seat held from 2024 to 2026. On that path: a regulated fund, Sydney roadshows, family-office dinners, and a private room of founders, investors and operators.</p>
-      <p>More of them are reached the way a growing market is filled. One named desk. A reason it fits one of the three. A walkthrough on the terminal. Market makers are shown the series and the saved book. Prop firms are shown the depth. Funds and research desks are handed the series for their own model. Who was introduced, who acted, and who came back is written down, and the next name comes off that path.</p>
-      <p>Trading influencers are the next layer. They want the edge the desks are using, and a more complex model built for the way they already trade in public. Wider audiences, from brand, retail, and live work, come in after that, as the partnership grows.</p>
-    </div>
+    <p class="kicker">How a trade gets to Forum</p>
+    <ol class="path">
+      <li><small>01</small><strong>Forum’s index</strong><span>The market.</span></li>
+      <li><small>02</small><strong>Tendex</strong><span>Price, series, and book on one screen.</span></li>
+      <li><small>03</small><strong>The desk</strong><span>Quotes, sizes, or runs the model.</span></li>
+      <li><small>04</small><strong>Back to Forum</strong><span>Forum keeps the account and the fee.</span></li>
+    </ol>
   </section>
 
   <section id="difference">
-    <h2>We will build this book with Forum.</h2>
-    <p class="dek">Forum builds the attention index and the exchange for serious traders, and keeps the brand off crypto. That is the venue we want the terminal to stand next to, and the one we will point our names at.</p>
-    <div class="prose">
-      <p>Attention already has incumbents. Polymarket and Kalshi list attention contracts inside a prediction book. Noise raised $7.1 million to build an attention market, then changed the product. Forum is the company whose product is the index itself: a name, a product, or a trend, traded continuously, for the desks a bank or a prop firm already knows how to read.</p>
-      <p>On a growing market, the first serious names and the first reference screen decide the room. Ben watched that from the Bybit seat, 2024 to 2026. A new book fills with the people you bring in while it is still small, one named introduction at a time. The cohort that sticks is the one introduced in that stretch. Attention markets are in it now. The category is public. The institutional screen is still open.</p>
-      <p>The first accounts we walk in are those three desks. The screen is built from Leo’s years in institutional finance, and the introduction comes from Ben’s institutional coverage. A prop desk sizes a market that looks like the one it already trades.</p>
-      <p>We are writing the investor proposal now, and Forum is the institutionally focused partner we want named in it. A terminal takes its standing from the venue it points at. We will put the referral work, the affiliate motion, and the first names to Forum, and keep them there for an initial period, so the book gets built in one place.</p>
-      <p>An attention exchange is paid when someone trades, and trades again. The account that changes the book is a market maker, a prop firm, or a fund that uses the terminal and comes back. Trading influencers follow, once they want that same edge. Forum keeps the customer and the fee. Tendex is the referral and the affiliate, paid when the person takes the action Forum defines.</p>
-    </div>
-    <div class="layers">
+    <h2>What Forum gets.</h2>
+    <p class="dek">Forum keeps the customer and the fee. Tendex is the screen and the referral. Paid when the person takes the action you define.</p>
+    <div class="ledger">
       <article>
-        <small>The clients</small>
-        <h3>The three desks, first.</h3>
-        <p>Market makers, prop trading firms, and hedge funds and research. The platform is built for the way they already work. Forum keeps the trading customer. Tendex walks them in and stays on the onboarding.</p>
+        <small>Forum keeps</small>
+        <ul>
+          <li>The trading account</li>
+          <li>The fee on the trade</li>
+          <li>The index and the brand</li>
+        </ul>
       </article>
       <article>
-        <small>The next layer</small>
-        <h3>Influencers who want the model.</h3>
-        <p>Trading voices who want the edge the desks are using, and a more complex model built for them. Wider audiences from brand, retail, and live work come in as the partnership grows.</p>
-      </article>
-      <article>
-        <small>The trade</small>
-        <h3>One venue. A working relationship.</h3>
-        <p>We put our resources to Forum. The index goes on the desk. The referral and affiliate motion runs through Forum for an initial period. Forum keeps the trading customer. If the names act, we price the next step in writing: a pilot fee, a fee per qualified activation, or a share of attributable activity.</p>
+        <small>Tendex brings</small>
+        <ul>
+          <li>The screen the three desks use</li>
+          <li>Named introductions, walked through in person</li>
+          <li>The referral book, on Forum first</li>
+        </ul>
       </article>
     </div>
+    <ul class="venues">
+      <li><small>Polymarket, Kalshi</small><strong>A contract inside a prediction book.</strong></li>
+      <li><small>Noise</small><strong>$7.1 million raised. The product then changed.</strong></li>
+      <li><small>Forum</small><strong>The index and the exchange. This is the book we staff.</strong></li>
+    </ul>
+    <p class="kicker">What we bring</p>
+    <ul class="stats">
+      <li><b>50</b><span>Named introductions a week. The motion from the exchange seat, 2024–2026.</span></li>
+      <li><b>5×</b><span>Sign-up to deposit against the standard page, on one learn campaign.</span></li>
+      <li><b>$1.5M+</b><span>Attributed sales from brand and retail work, 2023–2026.</span></li>
+      <li><b>100k</b><span>Live tickets. 44,000 of them in four hours, across 8 cities.</span></li>
+    </ul>
   </section>
 
   <section id="together">
@@ -519,7 +556,7 @@ try {
 
   <section id="rooms">
     <h2>Adjacent audiences, as the book grows.</h2>
-    <p class="dek">Past the three desks, further networks from the work already done can come into the partnership. These are adjacent audiences. They land once Forum’s market has a serious place for them.</p>
+    <p class="dek">Further networks, after the three desks. Each one is a room we have already worked.</p>
     <div class="switch" role="tablist" aria-label="Adjacent audiences">
       <button type="button" role="tab" id="tab-trading" aria-selected="true" aria-controls="panel-trading">Trading audiences</button>
       <button type="button" role="tab" id="tab-brands" aria-selected="false" aria-controls="panel-brands">Brand and culture</button>
@@ -527,8 +564,9 @@ try {
     </div>
 
     <div class="panel" id="panel-trading" role="tabpanel">
+      <p class="figure"><b>50/wk</b><span>Named introductions. 5× sign-up to deposit on one learn page.</span></p>
       <h3>People who already open a trading account.</h3>
-      <p>An exchange partnership seat, 2024 to 2026, covering educators, VIP partners, affiliates, and the audiences that follow them. They already know how to open a venue. As the book grows, the ones who trade in public want an edge and a model, and their followers come with them.</p>
+      <p>Educators, VIP partners, affiliates, and the audiences that follow them. Next, the ones who want the same model the desks are using.</p>
       <ul class="chips">
         <li>Educators</li>
         <li>VIP partners</li>
@@ -538,8 +576,9 @@ try {
     </div>
 
     <div class="panel" id="panel-brands" role="tabpanel" hidden>
+      <p class="figure"><b>$1.5M+</b><span>Attributed sales, 2023–2026.</span></p>
       <h3>Culture the index is about.</h3>
-      <p>A commercial seat across global consumer brands in sport, retail, and automotive, from 2023 to 2026. Creators and buyers who already pay for cultural presence. Useful when an index is a product, a city, or a name the public already follows.</p>
+      <p>Sport, retail, and automotive. Buyers who already pay for cultural presence, when an index is a product or a city.</p>
       <ul class="chips">
         <li>Sport</li>
         <li>Retail</li>
@@ -549,8 +588,9 @@ try {
     </div>
 
     <div class="panel" id="panel-live" role="tabpanel" hidden>
+      <p class="figure"><b>100k</b><span>Tickets. 44,000 in four hours. 8 cities.</span></p>
       <h3>A live room, brought in later.</h3>
-      <p>An operator role on a major music tour across Australia and New Zealand, beside the partners who hold the talent relationships. Promoters, sponsors, and a mass audience that shows up for a name. This comes in as the partnership grows, when an index needs a public room.</p>
+      <p>Promoters, sponsors, and a tour audience in Australia and New Zealand. In the partnership once an index needs a public room.</p>
       <ul class="chips">
         <li>Promoters</li>
         <li>Sponsors</li>
@@ -568,7 +608,7 @@ try {
           <img class="portrait" src="assets/leo-chow.jpg" alt="Leo Chow.">
         </figure>
         <h3>Leo Chow</h3>
-        <p>He built the terminal. Applied Finance and Applied Statistics at Macquarie, credit-risk scorecards at the Commonwealth Bank on books of up to 21 million rows, then a Scientific Reports paper whose experiment he ran. He traded crypto on his own account from 2020 to 2023, built APIs inside Commonwealth Bank fraud and scams work, and is now a senior developer at Westpac.</p>
+        <p>Built the terminal. Credit-risk scorecards, then the model code. Now a senior developer in business banking.</p>
         <ul class="facts">
           <li>Macquarie · Applied Finance and Applied Statistics</li>
           <li>Commonwealth Bank scorecards, 2012–2014 · up to 21 million rows</li>
@@ -583,7 +623,7 @@ try {
           <img src="assets/ben-bybit.jpg" alt="Ben Killen on stage for Bybit.">
         </figure>
         <h3>Ben Killen</h3>
-        <p>The Bybit seat has ended. What he is offering is a named person, a reason they fit, and Ben on the onboarding until they have done the action Forum defines.</p>
+        <p>Opens the three desks by name, and stays until they take the action Forum sets.</p>
         <ul class="facts">
           <li>Bybit partner acquisition, 2024–2026 · traders, KOLs, VIP, institutional</li>
           <li>Fortem Media, Head of Business Development, 2023–2026</li>
