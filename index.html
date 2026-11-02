@@ -249,7 +249,7 @@ try {
   }
   .terminal header, .row {
     display: grid;
-    grid-template-columns: 1.4fr 0.8fr 0.6fr 0.7fr;
+    grid-template-columns: 1.25fr 0.9fr 0.95fr 0.9fr;
     gap: 8px;
     align-items: center;
     padding: 12px 16px;
@@ -262,17 +262,11 @@ try {
     color: var(--muted);
     border-bottom: 1px solid var(--line);
   }
-  .row { border-top: 1px solid var(--line); font-size: 15px; }
-  .row b { font-weight: 500; }
-  .venue {
-    font-family: var(--mono);
-    font-size: 11px;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    color: var(--muted);
-  }
-  .up { color: var(--up); font-variant-numeric: tabular-nums; }
-  .flat { color: var(--amber); font-variant-numeric: tabular-nums; }
+  .row { border-top: 1px solid var(--line); font-size: 14px; }
+  .row b { font-weight: 600; }
+  .row .screen { color: var(--blue); }
+  .row .book { color: var(--amber); }
+  .row .access { color: var(--up); }
   .chart-wrap { padding: 8px 12px 4px; }
   .chart { width: 100%; height: auto; }
   .legend { display: flex; gap: 8px; padding: 0 16px 14px; }
@@ -386,8 +380,8 @@ try {
   @media (max-width: 760px) {
     .top { align-items: flex-start; flex-wrap: wrap; }
     .top nav { order: 3; width: 100%; }
-    .terminal header, .row { grid-template-columns: 1.2fr 0.7fr 0.6fr; }
-    .terminal header span:nth-child(2), .row .venue { display: none; }
+    .terminal header, .row { grid-template-columns: 1.15fr 0.85fr 0.85fr; }
+    .terminal header span:nth-child(4), .row .access { display: none; }
     section { padding: 48px 0; }
     main { padding-left: 16px; padding-right: 16px; }
   }
@@ -448,11 +442,11 @@ try {
         <button type="button" id="toggle-attention" aria-pressed="true">Attention</button>
       </div>
       <header>
-        <span>Market</span><span>Venue</span><span>Price</span><span>Attention</span>
+        <span>Market</span><span>Screen</span><span>Book</span><span>Access</span>
       </header>
-      <div class="row"><b>Forum index</b><span class="venue">Forum</span><span class="up">to add</span><span class="flat">your series</span></div>
-      <div class="row"><b>Attention market</b><span class="venue">Polymarket</span><span class="up">live on desk</span><span class="flat">overlaid</span></div>
-      <div class="row"><b>Book and tape</b><span class="venue">Archived</span><span class="up">replay</span><span class="flat">aligned</span></div>
+      <div class="row"><b>Market makers</b><span class="screen">One axis</span><span class="book">Size off depth</span><span class="access">Replay</span></div>
+      <div class="row"><b>Prop firms</b><span class="screen">Depth first</span><span class="book">Tape in time</span><span class="access">Polymarket</span></div>
+      <div class="row"><b>Hedge funds</b><span class="screen">Your model</span><span class="book">Rerun it</span><span class="access">Own series</span></div>
     </div>
   </section>
 
