@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Tendex for Forum</title>
-<meta name="description" content="Tendex is the data terminal for attention markets: price, the attention series a market settles on, and the saved book.">
+<meta name="description" content="Institutional connectivity for attention markets. Proprietary attention series, and the order book Tendex records.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Outfit:wght@400;500;600&display=swap" rel="stylesheet">
@@ -122,7 +122,7 @@ try {
     color: var(--amber);
   }
   h1, h2, h3 { font-weight: 500; letter-spacing: -0.035em; margin: 0; }
-  h1 { font-size: clamp(2.6rem, 6vw, 4.4rem); line-height: 0.98; max-width: 16ch; }
+  h1 { font-size: clamp(2.4rem, 4.6vw, 3.6rem); line-height: 1.02; max-width: 12em; }
   h2 { font-size: clamp(1.8rem, 3.5vw, 2.6rem); line-height: 1.08; max-width: 22ch; }
   .dek { max-width: 40rem; color: var(--soft); font-size: 1.125rem; margin: 16px 0 0; }
   .hero { display: grid; gap: 36px; align-items: center; padding-top: 48px; }
@@ -165,6 +165,8 @@ try {
     min-width: 0;
   }
   .layers h3 { font-size: 1.35rem; margin-bottom: 8px; letter-spacing: -0.03em; }
+  .layers ul { margin: 12px 0 0; padding: 0 0 0 1.1rem; color: var(--soft); }
+  .layers li { margin: 0 0 8px; }
   .flow { display: grid; gap: 12px; margin: 22px 0 0; padding: 0; list-style: none; }
   .flow strong { display: block; font-weight: 500; font-size: 1.15rem; letter-spacing: -0.03em; margin-bottom: 6px; }
 
@@ -374,8 +376,8 @@ try {
 <main>
   <section class="hero" id="opening">
     <div>
-      <h1>One terminal for the price, the score, and the book.</h1>
-      <p class="dek">Tendex is the data terminal for attention markets. Each market’s price sits on the attention series it settles on, with the order book and the trade tape saved beside it. Polymarket is on the desk today. Forum is the index we want on the next row.</p>
+      <h1>Institutional connectivity for attention markets.</h1>
+      <p class="dek">Proprietary attention series, derived from search demand and from count markets, plus the order book Tendex has been recording. Venues do not keep that book. The series is Tendex’s.</p>
     </div>
     <div class="terminal" id="terminal">
       <div class="chart-wrap">
@@ -401,42 +403,36 @@ try {
   </section>
 
   <section id="product">
-    <h2>The score, the tape, and the venue, on one screen.</h2>
-    <p class="dek">A trader currently keeps the market in one tab and the attention chart in another. Tendex is the screen that holds both, and keeps the book.</p>
+    <h2>Built for institutional desks.</h2>
     <div class="layers">
       <article>
-        <small>Signal</small>
-        <h3>Price, laid over the series it settles on.</h3>
-        <p>Every row carries the market price and the attention series that market pays out on. A desk can see whether the print and the score moved together.</p>
+        <small>Market makers</small>
+        <h3>Quote off the series and the book.</h3>
+        <ul>
+          <li>Price and the attention series sit on one axis, so the quote is checked against both.</li>
+          <li>Size from saved book depth, not from the last print.</li>
+          <li>Replay a move with the series and the tape in the same time.</li>
+        </ul>
       </article>
       <article>
-        <small>Tape</small>
-        <h3>The book and the trades, saved with that series.</h3>
-        <p>Tendex archives the order book and the trade tape and lines them up in time with the attention series. A desk can replay the whole move.</p>
+        <small>Prop trading firms</small>
+        <h3>See the depth before you size.</h3>
+        <ul>
+          <li>Read the book before the order, so the edge is still there at the quote.</li>
+          <li>Each saved trade sits in time with the attention series.</li>
+          <li>One list of attention markets, tagged by venue. Polymarket is connected.</li>
+        </ul>
       </article>
       <article>
-        <small>Access</small>
-        <h3>One list of markets. The series in your own system.</h3>
-        <p>Each market is tagged with the exchange it trades on. Polymarket attention markets are on the desk now. The API lets a desk pull Tendex’s own series into a model. A partner’s raw feed is not resold through it.</p>
+        <small>Hedge funds and research</small>
+        <h3>A series you can cite, and a book you can rerun.</h3>
+        <ul>
+          <li>A continuous series for a name, a product, or a trend, next to the market.</li>
+          <li>The order book history is the part a venue does not leave open.</li>
+          <li>Pull Tendex’s series into your own model. Raw partner feeds stay off the API.</li>
+        </ul>
       </article>
     </div>
-    <ol class="flow">
-      <li>
-        <small>01</small>
-        <strong>The venue publishes the market.</strong>
-        <p>Polymarket is connected. Forum’s index is the one we want added, on your terms.</p>
-      </li>
-      <li>
-        <small>02</small>
-        <strong>Tendex lines up price, score, and book.</strong>
-        <p>The series the market settles on sits on the same axis as the price. The tape is stored with it.</p>
-      </li>
-      <li>
-        <small>03</small>
-        <strong>A desk reads it, or pulls the series.</strong>
-        <p>On the screen, or through the API, into the model the desk already runs.</p>
-      </li>
-    </ol>
   </section>
 
   <section id="rooms">
