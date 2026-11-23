@@ -336,7 +336,9 @@ try {
   .note { margin: 18px 0 0; color: var(--muted); font-size: 14px; max-width: 44rem; }
   .note a { color: var(--ink); }
   .study { margin-top: 48px; }
-  .study > small { display: block; font-size: 11px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--hot); margin-bottom: 8px; }
+  .study > small, .tactic small { display: block; font-size: 11px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--hot); margin-bottom: 8px; }
+  .tactic { margin-top: 22px; background: var(--card); border: 1px solid var(--line); border-radius: 18px; padding: 18px 20px; }
+  .tactic p { margin: 0; }
   .study figcaption a { color: var(--ink); }
   .study h3 { font-size: clamp(1.6rem, 3vw, 2.1rem); max-width: 22ch; margin-bottom: 12px; }
   .study p { max-width: none; color: var(--soft); margin: 12px 0 0; }
@@ -424,7 +426,7 @@ try {
     <div>
       <p class="kicker">Attention market data</p>
       <h1>A research terminal for attention markets.</h1>
-      <p class="dek">Tendex puts a market next to the attention around it, so a trader can look at both before they act. Forum supplies the market and the index. We bring the screen, and a path to the traders who want it.</p>
+      <p class="dek">Tendex puts analysis next to attention markets, so a trader can look at both before they act. Forum supplies the market and the index. We bring the research layer, and a path to the traders who want it.</p>
     </div>
     <div class="lockup">
       <div class="lockup-brand">
@@ -445,8 +447,8 @@ try {
       <ul class="facts">
         <li>
           <small>Available today</small>
-          <strong>A market, beside search, Wikipedia, and news.</strong>
-          <span>The terminal reads those reference signals next to a market. One screen, not three tabs.</span>
+          <strong>A market, beside search trends, Wikipedia, and news.</strong>
+          <span>The terminal reads those reference signals next to a market. One page, not three websites.</span>
         </li>
         <li>
           <small>In development</small>
@@ -456,7 +458,7 @@ try {
         <li>
           <small>Exploring</small>
           <strong>Further signals, and AI-assisted research.</strong>
-          <span>More signals, then research assistance, once traders are using the first screen.</span>
+          <span>More signals, then research assistance, once traders are using the terminal.</span>
         </li>
       </ul>
     </div>
@@ -470,7 +472,7 @@ try {
       <article class="card">
         <small>01 · The terminal</small>
         <h3>One screen for the decision.</h3>
-        <p>The market, beside the attention around it. Search, Wikipedia, and news today. The index, the price, the book, and the funding rate when you allow them.</p>
+        <p>A market, beside the signals behind it. Search trends, Wikipedia, and news today. The index, the price, the book, and the funding rate when you allow them.</p>
       </article>
       <article class="card">
         <small>02 · The community</small>
@@ -480,7 +482,7 @@ try {
       <article class="card">
         <small>03 · The access</small>
         <h3>Our data, readable by an agent.</h3>
-        <p>The history we collect is proprietary. A person reads it on the terminal. An agent reaches it through AI-native access. That is the plan for the record, once the screen is in use.</p>
+        <p>We record book history from day one. It can't be rebuilt later. A person reads it on the terminal. An agent reaches it through AI-native access. That is the plan for the record, once the terminal is in use.</p>
       </article>
     </div>
     <p class="kicker" style="margin-top:48px">The moat</p>
@@ -530,12 +532,12 @@ try {
       <article class="card">
         <small>Forum keeps</small>
         <h3>The market.</h3>
-        <p>The index, the account, the fee, and the brand. Referrals and affiliates come to you first.</p>
+        <p>The index, the account, the trading fee, and the brand. Referrals and affiliates come to you first.</p>
       </article>
       <article class="card">
         <small>Tendex brings</small>
         <h3>The community, and the path.</h3>
-        <p>A focused group of data-driven traders, the business development around them, and the terminal they use to decide. Forum is the first market on that screen.</p>
+        <p>A focused group of data-driven traders, the business development around them, and the terminal they use to decide. Plans to bring in attention markets from Forum, Polymarket and Kalshi.</p>
       </article>
     </div>
   </section>
@@ -571,7 +573,7 @@ try {
       <li class="step">
         <small>Outreach</small>
         <strong>Foundational Members.</strong>
-        <p>By leveraging the same foundational user strategy as used in top platforms like Bybit, Tendex will start to reach early audiences to gain feedback on what users want, offering foundational benefits to early engagers. These users will be sent to Forum.</p>
+        <p>By leveraging the same foundational user strategy as used in top platforms, Tendex will start to reach early audiences to gain feedback on what users want, offering foundational benefits to early engagers. These users will be sent to Forum.</p>
       </li>
       <li class="step">
         <small>Community</small>
@@ -601,7 +603,7 @@ try {
         <p>He has spent the last two years with professional traders and institutions across Asia Pacific. He brings the early traders to the waitlist, and he can introduce a desk when Forum wants one.</p>
         <ul class="bio">
           <li>Asia Pacific · paths to larger institutions in most countries in the region</li>
-          <li>Bybit, 2024–2026 · professional traders, VIP, and institutional audiences</li>
+          <li>Bybit (launched with BTC perpetual futures), 2024–2026 · professional traders, VIP, and institutional audiences</li>
           <li>Fortem Media, Head of Business Development, 2023–2026</li>
           <li>Juicy Fest with The RAW · marketing and talent</li>
           <li>Advisor, The Collective</li>
@@ -610,19 +612,18 @@ try {
       <article class="who">
         <figure class="shot">
           <img class="portrait" src="assets/leo-chow.jpg" alt="Leo Chow.">
-          <figcaption>Leo Chow.</figcaption>
+          <figcaption>Leo Chow, at his first startup job.</figcaption>
         </figure>
         <h3>Leo Chow</h3>
         <p class="role">Software engineering</p>
-        <p>He built the terminal, and he is adding the reference signals on it. Applied finance, production scorecards, and software inside a major bank. He is the person who would put your data on the screen.</p>
+        <p>He built the terminal, and he is adding the reference signals on it. Applied finance, production machine learning models, and software inside some of the world's most profitable banks. He is the person who would put your data on the screen.</p>
         <ul class="bio">
-          <li>Macquarie · Applied Finance and Applied Statistics</li>
-          <li>Commonwealth Bank scorecards, 2012–2014 · up to 21 million rows</li>
-          <li>Scientific Reports, 2021 · scikit-learn package</li>
+          <li>Commonwealth Bank of Australia, 2012–2014 · machine learning models</li>
+          <li>Scientific Reports (part of Nature journal) publication, 2021 · <a href="https://github.com/leockl/helstrom-quantum-centroid-classifier">scikit-learn package</a></li>
           <li><a href="https://blog.openmesh.network/welcoming-our-new-hires-a-wave-of-talent-joins-openmesh-succeeding-the-open-d-i-hackathon-1d0a7a64cdf9">OpenD/I Hackathon 2023, first place</a></li>
-          <li><a href="https://www.linkedin.com/feed/update/urn:li:activity:7121969779577425920/">SXSW Sydney 2023, top six</a></li>
-          <li><a href="https://github.com/leockl/tool-ahead-of-time">tool-ahead-of-time</a> · tool calling for DeepSeek-R1 before LangChain supported it · 116 GitHub stars</li>
-          <li><a href="https://www.linkedin.com/in/leo-chow-a40b5031/">Senior developer, Westpac</a> · business banking</li>
+          <li><a href="https://www.linkedin.com/feed/update/urn:li:activity:7121969779577425920/">SXSW Sydney AI Agent Hackathon 2023, top six</a></li>
+          <li><a href="https://github.com/leockl/tool-ahead-of-time">tool-ahead-of-time</a> · first person to enable tool calling for DeepSeek-R1 before DeepSeek-R1 supported it · 116 GitHub stars</li>
+          <li><a href="https://www.linkedin.com/in/leo-chow-a40b5031/">Senior developer, Westpac Banking Corp</a> · Agentic AI systems</li>
         </ul>
       </article>
     </div>
@@ -652,14 +653,14 @@ try {
   </section>
 
   <section id="cases">
-    <p class="kicker">Two case studies</p>
-    <h2>What the numbers show.</h2>
-    <p class="dek">Public numbers only. Oddpool did not run referrals for Kalshi. Bybit’s commission rates are not a plan for Forum. The results are about what a young market needed before people could use it properly.</p>
+    <p class="kicker">Two parallels</p>
+    <h2>The reference for how we will build this with Forum.</h2>
+    <p class="dek">These are the two examples we will show you. Each is a player that helped build a market before the crowd arrived. The tactics we will employ are the ones in the pitch above, drawn from that record and from our own work with the traders who take a new market seriously.</p>
 
     <article class="study">
-      <small>Case 01 · prediction markets · 2026</small>
-      <h3>Oddpool made two venues readable. Kalshi then took the team inside.</h3>
-      <p>Kalshi and Polymarket list the same events under different names, identifiers, and prices. A researcher who wants a history has to clean that by hand. Oddpool, a two-person YC company, raised a $3 million seed in spring 2026 to build the missing layer: one search, one identifier, and an order-book history.</p>
+      <small>Parallel 01 · the research layer · Oddpool and Kalshi</small>
+      <h3>A player made the market readable. The venue kept the trade.</h3>
+      <p>Kalshi and Polymarket list the same events under different names, identifiers, and prices. A researcher who wants a history has to clean that by hand. Oddpool, a two-person YC company, raised a $3 million seed in spring 2026 to build the missing layer: one search, one identifier, and an order-book history. They did not buy the venue’s traffic. They made the market usable for people who were already serious about the data.</p>
       <p>By early September the public product searched more than 700,000 markets across both venues, with historical charts and more than 700 event dashboards. On 3 September the founders, Avi Arora and Ritesh Malpani, said a conversation with Kalshi CEO Tarek Mansour convinced them to build inside the exchange rather than beside it. Mansour called the data layer and the customer list impressive. No price was published. YC now marks the company inactive.</p>
       <figure>
         <img src="assets/oddpool-explore.png" alt="Oddpool’s live search across Kalshi and Polymarket, with the banner that the team is joining Kalshi.">
@@ -671,7 +672,10 @@ try {
         <div class="stat"><strong>700+</strong><span>Event dashboards on the live product.</span></div>
         <div class="stat"><strong>3 Sept</strong><span>Joined Kalshi. Terms not disclosed.</span></div>
       </div>
-      <p>The measured result is coverage, then a venue pulling the tool in-house. There is no public user count and no disclosed price. The useful part for Forum is who the layer was for. Oddpool was not a wide blast. It made the market readable for people who were already serious about the data, so a high-quality user could compare, study, and decide. That is the parallel. The next three months are for using the terminal to build those segments for Forum: institutions, professional traders, and people looking for an edge, and to show that their interest in attention markets is real. We stay beside the venue. We do not join it.</p>
+      <div class="tactic">
+        <small>The tactic we will employ</small>
+        <p>This is the research-layer move in the pitch, and it is the terminal Leo has built. Available today is analysis beside the market: search trends, Wikipedia, and news, on one page. Foundational Members are the high-quality segments, not a wide blast: institutions, professional traders, and people looking for an edge. In the first 90 days we offer them seed access, take their feedback, and send the ones who are ready to Forum’s waitlist. Building Engagement on Discord and X is how that group learns the market with us. We stay beside the venue. We do not join it the way Oddpool joined Kalshi. Once those segments are real, the later step is the one on the pitch: bring attention markets from Forum, Polymarket, and Kalshi onto the same screen. Forum keeps the account, the trading fee, and the brand.</p>
+      </div>
       <ul class="sources">
         <li><a href="https://www.ycombinator.com/companies/oddpool">YC</a></li>
         <li><a href="https://www.oddpool.com/">Oddpool</a></li>
@@ -681,11 +685,11 @@ try {
     </article>
 
     <article class="study">
-      <small>Case 02 · a new exchange · 2018–2024</small>
-      <h3>Bybit’s early volume came from partners who could see their own numbers.</h3>
-      <p>Bybit went online in December 2018 with a Bitcoin perpetual. Ben Zhou later said that three months on, volume was thin, and a referral link was not enough. The people with an audience were paid for a shout-out. They could not tell which post produced a trader. Bybit put most of its early engineering into an affiliate CRM: separate campaigns, clicks, conversions, and a commission the partner could check.</p>
+      <small>Parallel 02 · referrals · a new exchange, from the inside</small>
+      <h3>A player’s early volume came from partners who could see their own numbers.</h3>
+      <p>Bybit went online in December 2018 with a Bitcoin perpetual. Ben Zhou later said that three months on, volume was thin, and a referral link was not enough. The people with an audience were paid for a shout-out. They could not tell which post produced a trader. Bybit put most of its early engineering into an affiliate CRM: separate campaigns, clicks, conversions, and a commission the partner could check. That programme is Zhou’s, from the founding years. It is the industry example. It is not a programme we built.</p>
       <p>In June 2021 Zhou told Decrypt that in those early days 60% of Bybit’s volume came from affiliates, and that the share later fell to 20–30% once the brand could hold people on its own. That is a volume share, from the founder, not an audited share of users. On a separate point, in July 2020 he told Anthony Pompliano that about 60% of people who registered went on to deposit, and he credited the product and support, not the link. In November 2019 he described client growth of about 50% to 80% a month from March that year. The same 2021 interview says Bybit had aimed to reach 5% of BitMEX’s volume and was by then trading about ten times BitMEX. Those comparisons are his.</p>
-      <p>The programme is still there. The affiliate page says it is trusted by 100,000+ affiliates, which is Bybit’s own figure. In October 2024 an executive said one partner-token offer brought hundreds of new users in MENA. That is one campaign, also company-reported.</p>
+      <p>The programme is still there. The affiliate page says it is trusted by 100,000+ affiliates, which is Bybit’s own figure. In October 2024 an executive said one partner-token offer brought hundreds of new users in MENA. That is one campaign, also company-reported. Ben’s experience is the later one: 2024 to 2026 inside that market, with professional traders, VIP, and institutional audiences.</p>
       <figure>
         <img src="assets/bybit-affiliates.png" alt="Bybit’s affiliate programme page, headed Trusted by 100K+ Affiliates.">
         <figcaption>Bybit’s affiliate page, captured 23 November 2026. The payout on the chart is their estimator. The page says the figures are averages and that actual earnings vary. <a href="https://affiliates.bybit.com/">affiliates.bybit.com</a></figcaption>
@@ -696,7 +700,10 @@ try {
         <div class="stat"><strong>~60%</strong><span>Of registrants deposited. Zhou, 2020. Credited to the product.</span></div>
         <div class="stat"><strong>100,000+</strong><span>Affiliates on the current page. Bybit’s figure.</span></div>
       </div>
-      <p>The result that matters is how the first volume was earned. Partners who could see their own numbers brought serious users, and the product is what kept them. The share then fell, which is the point: affiliates open a market, they do not replace it. Ben spent 2024 to 2026 inside Bybit with professional traders, VIP, and institutional audiences. The lesson he would take into Forum is not the commission rate. It is a rigorous pilot of an affiliate path, on those same high-quality segments: a small cohort, a tracked introduction, and a clear read on who activates and who comes back. That is the three-month test beside Forum. Prove the interest, then keep only the segments that hold.</p>
+      <div class="tactic">
+        <small>The tactic we will employ</small>
+        <p>This is the Incentivise sharing step, run as a pilot rather than a blast. The early lesson from that market is that partners needed their own numbers, and that the share fell once the product could hold people. Ben spent 2024 to 2026 with the professional, VIP, and institutional side of that audience. That is the experience we are using. The first 90 days take the same Foundational Members from the Oddpool parallel and give Forum a tracked introduction: a small cohort, a clear read on who activates and who comes back, and no copied commission rate. Discord and X keep the cohort in the conversation. Referrals and affiliates come to Forum first. We keep only the segments that hold, which is the later step on the pitch: scale from the strongest engagement.</p>
+      </div>
       <ul class="sources">
         <li><a href="https://decrypt.co/74576/the-amazing-billion-dollar-dao">Decrypt, June 2021</a></li>
         <li><a href="https://www.youtube.com/watch?v=0mEk9MX5DBM">Zhou, 2020</a></li>
