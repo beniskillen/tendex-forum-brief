@@ -297,6 +297,77 @@ try {
   .bio li { padding: 8px 0; border-top: 1px solid var(--line); color: var(--soft); font-size: 15px; }
   .bio a { color: var(--ink); }
 
+  .flow { display: grid; gap: 10px; margin: 28px 0 0; padding: 0; list-style: none; counter-reset: step; }
+  .flow li {
+    display: grid;
+    grid-template-columns: 28px 1fr;
+    gap: 12px;
+    align-items: start;
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    padding: 14px 16px;
+  }
+  .flow li::before {
+    counter-increment: step;
+    content: counter(step);
+    width: 28px;
+    height: 28px;
+    border-radius: 999px;
+    background: var(--hot);
+    color: #fff;
+    font-size: 13px;
+    font-weight: 500;
+    display: grid;
+    place-items: center;
+  }
+  .flow strong { display: block; font-weight: 500; letter-spacing: -0.03em; }
+  .flow span { display: block; margin-top: 4px; color: var(--soft); }
+  .sources { display: flex; flex-wrap: wrap; gap: 8px; margin: 16px 0 0; padding: 0; list-style: none; }
+  .sources a {
+    color: var(--ink);
+    text-decoration: none;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    padding: 6px 10px;
+    font-size: 13px;
+  }
+  .sources a:hover { border-color: var(--ink); }
+  .note { margin: 18px 0 0; color: var(--muted); font-size: 14px; max-width: 44rem; }
+  .note a { color: var(--ink); }
+  .study { margin-top: 48px; }
+  .study > small { display: block; font-size: 11px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--hot); margin-bottom: 8px; }
+  .study figcaption a { color: var(--ink); }
+  .study h3 { font-size: clamp(1.6rem, 3vw, 2.1rem); max-width: 22ch; margin-bottom: 12px; }
+  .study p { max-width: none; color: var(--soft); margin: 12px 0 0; }
+  .study figure { margin: 22px 0 0; }
+  .study img {
+    width: 100%;
+    max-height: 460px;
+    object-fit: cover;
+    object-position: top center;
+    display: block;
+    border-radius: 18px;
+    border: 1px solid var(--line);
+  }
+  .stats { display: grid; gap: 10px; margin-top: 22px; }
+  .stat {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    padding: 14px 16px;
+    min-width: 0;
+  }
+  .stat strong { display: block; font-size: 1.35rem; font-weight: 500; letter-spacing: -0.03em; }
+  .stat span { display: block; margin-top: 4px; color: var(--muted); font-size: 13px; }
+  .compare { display: grid; gap: 12px; margin-top: 28px; }
+  .compare article { background: var(--card); border: 1px solid var(--line); border-radius: 18px; padding: 18px; }
+  .compare h3 { font-size: 1.25rem; margin-bottom: 12px; }
+  .compare dl { margin: 0; }
+  .compare dt { font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--hot); font-weight: 500; margin-top: 12px; }
+  .compare dt:first-child { margin-top: 0; }
+  .compare dd { margin: 4px 0 0; color: var(--soft); }
+
   footer { max-width: 1080px; margin: 0 auto; color: var(--muted); font-size: 14px; padding: 28px 22px 48px; }
   footer p { max-width: 40rem; margin: 0; }
 
@@ -312,6 +383,8 @@ try {
     .grid, .ask-grid { grid-template-columns: repeat(3, 1fr); }
     .split { grid-template-columns: 1fr 1fr; }
     .steps { grid-template-columns: repeat(3, 1fr); }
+    .compare { grid-template-columns: 1fr 1fr; }
+    .stats { grid-template-columns: repeat(4, 1fr); }
     .stage-main { grid-template-columns: 0.8fr 1.2fr; align-items: end; }
     .people { grid-template-columns: 1.15fr 0.85fr; align-items: start; }
   }
@@ -341,6 +414,7 @@ try {
     <a href="#offer">Offer</a>
     <a href="#people">People</a>
     <a href="#ask">Ask</a>
+    <a href="#cases">Cases</a>
   </nav>
   <button class="theme" id="theme" type="button" aria-pressed="false">Dark mode</button>
 </header>
@@ -575,6 +649,61 @@ try {
       </div>
       <a class="mailto" href="mailto:admin@tendexterminal.com?cc=ben@growthlabsconsulting.xyz&subject=Tendex%20and%20Forum">Write to Tendex</a>
     </div>
+  </section>
+
+  <section id="cases">
+    <p class="kicker">Two case studies</p>
+    <h2>What the numbers show.</h2>
+    <p class="dek">Public numbers only. Oddpool did not run referrals for Kalshi. Bybit’s commission rates are not a plan for Forum. The results are about what a young market needed before people could use it properly.</p>
+
+    <article class="study">
+      <small>Case 01 · prediction markets · 2026</small>
+      <h3>Oddpool made two venues readable. Kalshi then took the team inside.</h3>
+      <p>Kalshi and Polymarket list the same events under different names, identifiers, and prices. A researcher who wants a history has to clean that by hand. Oddpool, a two-person YC company, raised a $3 million seed in spring 2026 to build the missing layer: one search, one identifier, and an order-book history.</p>
+      <p>By early September the public product searched more than 700,000 markets across both venues, with historical charts and more than 700 event dashboards. On 3 September the founders, Avi Arora and Ritesh Malpani, said a conversation with Kalshi CEO Tarek Mansour convinced them to build inside the exchange rather than beside it. Mansour called the data layer and the customer list impressive. No price was published. YC now marks the company inactive.</p>
+      <figure>
+        <img src="assets/oddpool-explore.png" alt="Oddpool’s live search across Kalshi and Polymarket, with the banner that the team is joining Kalshi.">
+        <figcaption>Oddpool’s search, captured 23 November 2026. The volumes on the cards are the venues’ markets, not Oddpool’s revenue. <a href="https://www.oddpool.com/explore">oddpool.com/explore</a></figcaption>
+      </figure>
+      <div class="stats">
+        <div class="stat"><strong>$3m</strong><span>Seed, spring 2026. Founders’ account.</span></div>
+        <div class="stat"><strong>700,000+</strong><span>Markets in one search, Kalshi and Polymarket.</span></div>
+        <div class="stat"><strong>700+</strong><span>Event dashboards on the live product.</span></div>
+        <div class="stat"><strong>3 Sept</strong><span>Joined Kalshi. Terms not disclosed.</span></div>
+      </div>
+      <p>The measured result is coverage, then a venue pulling the tool in-house. There is no public user count and no disclosed price. The useful part for Forum is who the layer was for. Oddpool was not a wide blast. It made the market readable for people who were already serious about the data, so a high-quality user could compare, study, and decide. That is the parallel. The next three months are for using the terminal to build those segments for Forum: institutions, professional traders, and people looking for an edge, and to show that their interest in attention markets is real. We stay beside the venue. We do not join it.</p>
+      <ul class="sources">
+        <li><a href="https://www.ycombinator.com/companies/oddpool">YC</a></li>
+        <li><a href="https://www.oddpool.com/">Oddpool</a></li>
+        <li><a href="https://www.linkedin.com/posts/avi-arora_oddpool-is-joining-kalshi-ritesh-and-i-activity-7501319096693628928-RgtS">Founders, 3 Sept 2026</a></li>
+        <li><a href="https://seedtable.com/exits/oddpool">Seedtable</a></li>
+      </ul>
+    </article>
+
+    <article class="study">
+      <small>Case 02 · a new exchange · 2018–2024</small>
+      <h3>Bybit’s early volume came from partners who could see their own numbers.</h3>
+      <p>Bybit went online in December 2018 with a Bitcoin perpetual. Ben Zhou later said that three months on, volume was thin, and a referral link was not enough. The people with an audience were paid for a shout-out. They could not tell which post produced a trader. Bybit put most of its early engineering into an affiliate CRM: separate campaigns, clicks, conversions, and a commission the partner could check.</p>
+      <p>In June 2021 Zhou told Decrypt that in those early days 60% of Bybit’s volume came from affiliates, and that the share later fell to 20–30% once the brand could hold people on its own. That is a volume share, from the founder, not an audited share of users. On a separate point, in July 2020 he told Anthony Pompliano that about 60% of people who registered went on to deposit, and he credited the product and support, not the link. In November 2019 he described client growth of about 50% to 80% a month from March that year. The same 2021 interview says Bybit had aimed to reach 5% of BitMEX’s volume and was by then trading about ten times BitMEX. Those comparisons are his.</p>
+      <p>The programme is still there. The affiliate page says it is trusted by 100,000+ affiliates, which is Bybit’s own figure. In October 2024 an executive said one partner-token offer brought hundreds of new users in MENA. That is one campaign, also company-reported.</p>
+      <figure>
+        <img src="assets/bybit-affiliates.png" alt="Bybit’s affiliate programme page, headed Trusted by 100K+ Affiliates.">
+        <figcaption>Bybit’s affiliate page, captured 23 November 2026. The payout on the chart is their estimator. The page says the figures are averages and that actual earnings vary. <a href="https://affiliates.bybit.com/">affiliates.bybit.com</a></figcaption>
+      </figure>
+      <div class="stats">
+        <div class="stat"><strong>60%</strong><span>Of early volume, from affiliates. Zhou, 2021.</span></div>
+        <div class="stat"><strong>20–30%</strong><span>Affiliate share of volume after the brand held.</span></div>
+        <div class="stat"><strong>~60%</strong><span>Of registrants deposited. Zhou, 2020. Credited to the product.</span></div>
+        <div class="stat"><strong>100,000+</strong><span>Affiliates on the current page. Bybit’s figure.</span></div>
+      </div>
+      <p>The result that matters is how the first volume was earned. Partners who could see their own numbers brought serious users, and the product is what kept them. The share then fell, which is the point: affiliates open a market, they do not replace it. Ben spent 2024 to 2026 inside Bybit with professional traders, VIP, and institutional audiences. The lesson he would take into Forum is not the commission rate. It is a rigorous pilot of an affiliate path, on those same high-quality segments: a small cohort, a tracked introduction, and a clear read on who activates and who comes back. That is the three-month test beside Forum. Prove the interest, then keep only the segments that hold.</p>
+      <ul class="sources">
+        <li><a href="https://decrypt.co/74576/the-amazing-billion-dollar-dao">Decrypt, June 2021</a></li>
+        <li><a href="https://www.youtube.com/watch?v=0mEk9MX5DBM">Zhou, 2020</a></li>
+        <li><a href="https://cryptocoinshow.com/interview/blockchain-interviews-ben-zhou-ceo-of-bybit/">Interview, Nov 2019</a></li>
+        <li><a href="https://www.bybit.com/en/press/post/with-its-affiliate-program-bybit-aims-to-grow-the-role-of-crypto-influencers-blt3d63781beb7e8c52">Bybit, Oct 2024</a></li>
+      </ul>
+    </article>
   </section>
 </main>
 
